@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 
 type Props = {
   /** "dark" for dark section backgrounds, "light" for the cream relief section */

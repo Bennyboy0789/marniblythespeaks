@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import CountUp from "@/components/CountUp";
 import CtaPair from "@/components/CtaPair";
 import FeaturedBy from "@/components/FeaturedBy";

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, DM_Sans } from "next/font/google";
+import { ViewTransitions } from "next-view-transitions";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Nav from "@/components/Nav";
@@ -98,10 +99,11 @@ const orgJsonLd = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${playfair.variable} ${dmSans.variable} h-full antialiased`}
-    >
+    <ViewTransitions>
+      <html
+        lang="en"
+        className={`${playfair.variable} ${dmSans.variable} h-full antialiased`}
+      >
       <body className="flex min-h-full flex-col bg-abyss">
         <script
           type="application/ld+json"
@@ -135,6 +137,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Analytics />
         <TrackClicks />
       </body>
-    </html>
+      </html>
+    </ViewTransitions>
   );
 }

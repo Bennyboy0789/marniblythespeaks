@@ -156,6 +156,36 @@ body {
   animation-play-state: paused !important;
 }
 
+/* Page transitions (View Transitions API via next-view-transitions):
+   a quick luxury cross-fade with a whisper of lift on the incoming page.
+   Skipped entirely for reduced-motion users and when motion is paused. */
+::view-transition-old(root) {
+  animation: vt-out 0.28s cubic-bezier(0.4, 0, 1, 1) both;
+}
+::view-transition-new(root) {
+  animation: vt-in 0.34s cubic-bezier(0, 0, 0.2, 1) both;
+}
+
+@keyframes vt-out {
+  to { opacity: 0; }
+}
+
+@keyframes vt-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}
+[data-motion-paused]::view-transition-old(root),
+[data-motion-paused]::view-transition-new(root) {
+  animation: none !important;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .gradient-text,
   .gold-text {

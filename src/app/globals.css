@@ -1,20 +1,289 @@
 @import "tailwindcss";
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --color-accent: #c9a96e;
+@theme {
+  --color-brand: #6b3fa0;
+  --color-brand-bright: #7c3aed;
+  --color-violet: #a855f7;
+  --color-lavender: #a78bfa;
+  --color-navy: #1d3557;
+  --color-gold: #e9c46a;
+  --color-cream: #f2efe9;
+  --color-ink: #333333;
+  --color-stage: #120c1d;
+  --color-abyss: #0d0916;
+
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-sans: var(--font-dm-sans), system-ui, sans-serif;
 }
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-abyss);
+  color: rgba(255, 255, 255, 0.88);
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+/* Purple stage-light glow used behind dark hero sections */
+.stage-glow {
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 10%, rgba(124, 58, 237, 0.35), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 15% 90%, rgba(107, 63, 160, 0.3), transparent 55%),
+    var(--color-stage);
+}
+
+/* Standard dark section — subtle purple drift so sections aren't flat black */
+.section-dark {
+  background: linear-gradient(165deg, #191026 0%, #0d0916 45%, #150e24 100%);
+}
+
+/* Richer purple/navy gradient panel */
+.section-purple {
+  background: linear-gradient(135deg, #2a1747 0%, #150e24 55%, #1d3557 140%);
+}
+
+/* Gradient headline treatment for the key phrase — animated shimmer */
+.gradient-text {
+  background: linear-gradient(
+    100deg,
+    #c4b5fd 0%,
+    #a855f7 30%,
+    #e9c46a 55%,
+    #a855f7 80%,
+    #c4b5fd 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Metallic gold-foil text for luxury accents */
+.gold-text {
+  background: linear-gradient(
+    105deg,
+    #8a6a1f 0%,
+    #e9c46a 25%,
+    #fff3c4 50%,
+    #e9c46a 75%,
+    #8a6a1f 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Hollow outline type for the luxury word ticker */
+.outline-text {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(233, 196, 106, 0.55);
+}
+
+/* Glass card with a gold→purple gradient border and hover glow */
+.card-lux {
+  border: 1px solid transparent;
+  border-radius: 0.75rem;
+  background:
+    linear-gradient(160deg, rgba(32, 21, 54, 0.85), rgba(15, 10, 26, 0.95))
+      padding-box,
+    linear-gradient(
+        135deg,
+        rgba(233, 196, 106, 0.5),
+        rgba(124, 58, 237, 0.45) 40%,
+        rgba(255, 255, 255, 0.07)
+      )
+      border-box;
+  transition:
+    box-shadow 0.35s ease,
+    transform 0.35s ease;
+}
+.card-lux:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 14px 44px -12px rgba(124, 58, 237, 0.5),
+    0 0 0 1px rgba(233, 196, 106, 0.3);
+}
+
+/* Thin gold hairline divider that fades at the edges */
+.hairline-gold {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(233, 196, 106, 0.6),
+    transparent
+  );
+}
+
+/* Infinite marquee — track holds two identical halves */
+.marquee {
+  overflow: hidden;
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+::selection {
+  background: #7c3aed;
+  color: #ffffff;
+}
+
+/* Brand keyboard focus — replaces faint browser defaults on the dark canvas */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Motion pause toggle (WCAG 2.2.2): halts all CSS animation; videos are
+   paused by MotionToggle via JS. */
+[data-motion-paused] *,
+[data-motion-paused] *::before,
+[data-motion-paused] *::after {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .gradient-text,
+  .gold-text {
+    animation: shimmer 7s ease-in-out infinite;
+  }
+  .marquee-track {
+    animation: marquee 45s linear infinite;
+  }
+  .marquee-track.marquee-slow {
+    animation-duration: 70s;
+  }
+  .hero-video {
+    animation: kenburns 28s ease-in-out infinite alternate;
+  }
+  .float-pulse {
+    animation: floatpulse 9s ease-in-out infinite;
+  }
+  .scroll-cue {
+    animation: scrollcue 2.2s ease-in-out infinite;
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* Slow cinematic push-in on the hero background video */
+@keyframes kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.09); }
+}
+
+/* Drifting glow orb behind hero content */
+@keyframes floatpulse {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.55; }
+  50% { transform: translate(4%, -6%) scale(1.15); opacity: 0.85; }
+  100% { transform: translate(0, 0) scale(1); opacity: 0.55; }
+}
+
+@keyframes scrollcue {
+  0%, 100% { transform: translateY(0); opacity: 0.7; }
+  50% { transform: translateY(8px); opacity: 1; }
+}
+
+/* CSS-only entrance for ABOVE-THE-FOLD hero content. Unlike the JS Reveal
+   component, these paint without waiting for hydration (LCP fix) and render
+   fully visible when reduced motion is preferred or JS is disabled. */
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    opacity: 0;
+    animation: rise-in 0.7s cubic-bezier(0.21, 0.65, 0.36, 1) forwards;
+  }
+  .rise-2 { animation-delay: 0.12s; }
+  .rise-3 { animation-delay: 0.28s; }
+  .rise-4 { animation-delay: 0.44s; }
+}
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Sweeping stage-light beams behind the hero (aria-hidden decoration) */
+.beam {
+  position: absolute;
+  top: -25%;
+  height: 150%;
+  width: 55vw;
+  pointer-events: none;
+  filter: blur(8px);
+  transform-origin: 50% 0%;
+  background: conic-gradient(
+    from 200deg at 50% 0%,
+    transparent 42%,
+    rgba(233, 196, 106, 0.07) 47%,
+    rgba(196, 181, 253, 0.14) 50%,
+    rgba(233, 196, 106, 0.07) 53%,
+    transparent 58%
+  );
+}
+
+@keyframes beam-sweep {
+  0%, 100% { transform: rotate(-9deg); }
+  50% { transform: rotate(9deg); }
+}
+
+/* Award-show shine sweep across primary CTAs on hover */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -70%;
+  height: 100%;
+  width: 45%;
+  transform: skewX(-20deg);
+  background: linear-gradient(
+    105deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+}
+
+@keyframes shine {
+  to { left: 140%; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .beam { animation: beam-sweep 14s ease-in-out infinite; }
+  .beam-2 { animation-duration: 18s; animation-delay: -6s; }
+  .btn-shine:hover::after { animation: shine 0.8s ease forwards; }
+}
+
+/* Light textured relief section (testimonials) */
+.texture-light {
+  background-color: var(--color-cream);
+  background-image: radial-gradient(rgba(29, 53, 87, 0.05) 1px, transparent 1px);
+  background-size: 22px 22px;
+  color: var(--color-ink);
 }

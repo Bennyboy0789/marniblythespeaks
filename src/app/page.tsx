@@ -426,6 +426,35 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ============ INSTAGRAM ============ */}
+      <section className="section-dark">
+        <div className="mx-auto max-w-6xl px-5 py-20 md:py-24">
+          <Reveal className="text-center">
+            <h2 className="text-3xl font-bold uppercase tracking-tight text-white md:text-4xl">
+              @marniblythespeaks
+            </h2>
+            <p className="mt-3 leading-relaxed text-white/70">
+              Speaking clips, backstage moments, and Human Intelligence in the
+              wild.
+            </p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <InstagramFeed />
+          </Reveal>
+          <p className="mt-8 text-center">
+            <a
+              href="https://www.instagram.com/marniblythespeaks"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-bold uppercase tracking-[0.15em] text-gold underline underline-offset-8 hover:text-white"
+            >
+              Follow on Instagram →
+              <span className="sr-only"> (opens in new tab)</span>
+            </a>
+          </p>
+        </div>
+      </section>
+
       {/* ============ BILLBOARD QUOTE ============ */}
       <section className="section-purple relative overflow-hidden">
         <div aria-hidden className="hairline-gold absolute inset-x-0 top-0" />
@@ -514,35 +543,6 @@ export default function Home() {
               </Link>
             </div>
           </Reveal>
-        </div>
-      </section>
-
-      {/* ============ INSTAGRAM ============ */}
-      <section className="section-dark">
-        <div className="mx-auto max-w-6xl px-5 py-20 md:py-24">
-          <Reveal className="text-center">
-            <h2 className="text-3xl font-bold uppercase tracking-tight text-white md:text-4xl">
-              @marniblythespeaks
-            </h2>
-            <p className="mt-3 leading-relaxed text-white/70">
-              Speaking clips, backstage moments, and Human Intelligence in the
-              wild.
-            </p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <InstagramFeed />
-          </Reveal>
-          <p className="mt-8 text-center">
-            <a
-              href="https://www.instagram.com/marniblythespeaks"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-bold uppercase tracking-[0.15em] text-gold underline underline-offset-8 hover:text-white"
-            >
-              Follow on Instagram →
-              <span className="sr-only"> (opens in new tab)</span>
-            </a>
-          </p>
         </div>
       </section>
 

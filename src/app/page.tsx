@@ -89,7 +89,8 @@ export default function Home() {
           aria-hidden
         />
         <HeroVideo />
-        <div className="absolute inset-0 bg-gradient-to-b from-abyss/80 via-stage/60 to-abyss" />
+        <div className="absolute inset-0 bg-gradient-to-t from-abyss via-stage/55 to-abyss/40" />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-abyss/75 via-transparent to-transparent" />
         {/* sweeping stage-light beams */}
         <div aria-hidden className="beam left-[8%]" />
         <div aria-hidden className="beam beam-2 right-[8%]" />
@@ -102,40 +103,51 @@ export default function Home() {
           aria-hidden
           className="float-pulse absolute bottom-0 right-[10%] h-[340px] w-[340px] rounded-full bg-gold/15 blur-[110px] [animation-delay:3s]"
         />
-        <div className="relative mx-auto flex max-w-6xl flex-col items-center px-5 pb-28 pt-28 text-center md:pb-36 md:pt-40">
-          <div className="rise">
-            <p className="mb-6 flex items-center gap-4 text-sm font-bold uppercase tracking-[0.35em] text-gold">
-              <span aria-hidden className="hairline-gold w-10" />
+        {/* Vertical name rail (desktop) — poster-editorial detail */}
+        <div
+          aria-hidden
+          className="rise absolute left-7 top-1/2 hidden -translate-y-1/2 items-center gap-4 lg:flex lg:flex-col"
+        >
+          <span className="block h-20 w-px bg-gradient-to-b from-transparent to-gold/60" />
+          <p className="[writing-mode:vertical-rl] rotate-180 text-xs font-bold uppercase tracking-[0.45em] text-gold">
+            Keynote Speaker · Marni Blythe
+          </p>
+          <span className="block h-20 w-px bg-gradient-to-t from-transparent to-gold/60" />
+        </div>
+
+        <div className="relative mx-auto flex min-h-[82vh] max-w-6xl flex-col justify-end px-5 pb-16 pt-24 md:min-h-[86vh] md:pb-20">
+          {/* Mobile eyebrow (the rail replaces this on desktop) */}
+          <div className="rise lg:hidden">
+            <p className="mb-5 text-xs font-bold uppercase tracking-[0.35em] text-gold">
               Keynote Speaker · Marni Blythe
-              <span aria-hidden className="hairline-gold w-10" />
             </p>
           </div>
+
           <div className="rise rise-2">
-            <h1 className="font-bold uppercase leading-[0.98] tracking-tight">
-              <span className="gradient-text block text-[clamp(3rem,9vw,7.5rem)]">
+            <h1 className="font-bold uppercase leading-[0.9] tracking-tight">
+              <span className="block text-[clamp(3.4rem,11vw,10rem)] text-transparent [-webkit-text-stroke:2px_rgba(233,196,106,0.65)]">
                 Human
               </span>
-              <span className="gradient-text block text-[clamp(3rem,9vw,7.5rem)]">
+              <span className="gradient-text block text-[clamp(2.6rem,8.5vw,7.5rem)] md:ml-[7vw]">
                 Intelligence
               </span>
-              <span className="mt-5 block text-[clamp(1.2rem,3vw,2.2rem)] font-bold uppercase tracking-[0.35em] text-white">
+              <span className="mt-4 block text-[clamp(1rem,2.2vw,1.6rem)] font-bold uppercase tracking-[0.4em] text-white md:ml-[7vw]">
                 in the Age of <span className="gold-text">AI</span>
               </span>
             </h1>
           </div>
-          <div className="rise rise-3">
-            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/85">
-              Keynotes and programs that equip leaders to read the room, build
-              trust, and get people thinking instead of just executing — for
-              leadership summits, culture resets, and every room navigating
-              AI. The skill that actually moves organizations forward
-              isn&apos;t AI — it&apos;s HI.
-            </p>
-          </div>
-          {/* Research: dual hero CTA "Book + Watch" (Ryan Estis pattern) —
-              the reel is the #1 evaluation asset, so surface it from the hero */}
-          <div className="rise rise-4">
-            <div className="mt-12 flex flex-col justify-center gap-4 sm:flex-row">
+
+          <div className="mt-10 flex flex-col gap-8 md:mt-12 md:flex-row md:items-end md:justify-between">
+            <div className="rise rise-3 max-w-md border-l-2 border-gold/60 pl-5">
+              <p className="text-base leading-relaxed text-white/85">
+                Keynotes and programs that equip leaders to read the room,
+                build trust, and get people thinking instead of just executing
+                — for leadership summits, culture resets, and every room
+                navigating AI.
+              </p>
+            </div>
+            {/* Research: dual hero CTA "Book + Watch" (Ryan Estis pattern) */}
+            <div className="rise rise-4 flex shrink-0 flex-col gap-4 sm:flex-row">
               <Link
                 href="/contact"
                 className="btn-shine rounded-md bg-gradient-to-r from-brand-bright via-violet to-brand-bright bg-[length:200%_auto] px-8 py-4 text-center text-sm font-bold uppercase tracking-[0.15em] text-white shadow-[0_0_35px_-5px_rgba(124,58,237,0.7)] transition-all duration-300 hover:bg-[position:right_center] hover:shadow-[0_0_50px_-5px_rgba(124,58,237,0.9)]"
@@ -152,22 +164,6 @@ export default function Home() {
                 Watch Marni
               </a>
             </div>
-          </div>
-          <div
-            aria-hidden
-            className="scroll-cue absolute bottom-8 left-1/2 -translate-x-1/2 text-gold/70"
-          >
-            <svg
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-            >
-              <path d="M6 9l6 6 6-6" />
-            </svg>
           </div>
         </div>
       </section>

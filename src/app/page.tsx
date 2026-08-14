@@ -125,7 +125,7 @@ export default function Home() {
 
           <div className="rise rise-2">
             <h1 className="font-bold uppercase leading-[0.9] tracking-tight">
-              <span className="block text-[clamp(3.4rem,11vw,10rem)] text-transparent [-webkit-text-stroke:2px_rgba(233,196,106,0.65)]">
+              <span className="gold-text block text-[clamp(3.4rem,11vw,10rem)]">
                 Human
               </span>
               <span className="gradient-text block text-[clamp(2.6rem,8.5vw,7.5rem)] md:ml-[7vw]">
@@ -183,7 +183,7 @@ export default function Home() {
                 <span key={w} className="flex items-center">
                   <span
                     className={`whitespace-nowrap px-8 text-3xl font-bold uppercase tracking-tight md:text-4xl ${
-                      i % 2 === 0 ? "gradient-text" : "outline-text"
+                      i % 2 === 0 ? "gradient-text" : "gold-text"
                     }`}
                   >
                     {w}

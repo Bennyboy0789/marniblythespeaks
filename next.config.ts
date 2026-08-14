@@ -15,7 +15,17 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   async headers() {
-    return [{ source: "/(.*)", headers: securityHeaders }];
+    return [
+      { source: "/(.*)", headers: securityHeaders },
+      // Keep the staging domain out of search indexes so it never competes
+      // with marniblythespeaks.com. (*.vercel.app previews get noindex from
+      // Vercel automatically; this covers the custom staging alias.)
+      {
+        source: "/(.*)",
+        has: [{ type: "host", value: "marni.stagmkt.dev" }],
+        headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }],
+      },
+    ];
   },
 };
 

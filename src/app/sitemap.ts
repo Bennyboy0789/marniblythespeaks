@@ -7,11 +7,13 @@ const BASE = "https://marniblythespeaks.com";
 // relevant date when a page's copy actually changes (a shared build-time
 // timestamp carries no freshness signal and eventually gets discounted).
 const LAUNCH = "2026-08-13";
+const REVIEWS_UPDATE = "2026-10-05";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
-    { url: BASE, lastModified: LAUNCH },
-    { url: `${BASE}/speaking`, lastModified: LAUNCH },
+    { url: BASE, lastModified: REVIEWS_UPDATE },
+    { url: `${BASE}/speaking`, lastModified: REVIEWS_UPDATE },
+    { url: `${BASE}/reviews`, lastModified: REVIEWS_UPDATE },
     { url: `${BASE}/contact`, lastModified: LAUNCH },
     { url: `${BASE}/about`, lastModified: LAUNCH },
     { url: `${BASE}/privacy`, lastModified: LAUNCH },

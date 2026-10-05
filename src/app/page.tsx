@@ -10,7 +10,8 @@ import Reveal from "@/components/Reveal";
 
 import { industries } from "@/lib/industries";
 import { programs } from "@/lib/programs";
-import { testimonials } from "@/lib/testimonials";
+import TestimonialCard from "@/components/TestimonialCard";
+import { homeTestimonials, testimonials } from "@/lib/testimonials";
 
 const brandLogos = [
   { src: "/images/logos/Adidas.png", alt: "Adidas" },
@@ -573,27 +574,33 @@ export default function Home() {
         </Reveal>
       </section>
 
-      {/* ============ TESTIMONIAL (light relief section) ============
-          Single featured organizer quote — switch to a 3-up grid when two
-          more named quotes land in src/lib/testimonials.ts */}
+      {/* ============ TESTIMONIALS (light relief section) ============
+          3-up of verbatim excerpts (picked in src/lib/testimonials.ts);
+          the full set lives on /reviews */}
       <section className="texture-light">
-        <div className="mx-auto max-w-4xl px-5 py-20 text-center md:py-24">
-          <Reveal>
+        <div className="mx-auto max-w-6xl px-5 py-20 md:py-24">
+          <Reveal className="text-center">
             <p className="text-sm font-bold uppercase tracking-[0.3em] text-brand">
-              What Event Organizers Say
+              What Leaders Say
             </p>
-            <blockquote className="mx-auto mt-8 max-w-3xl font-serif text-2xl italic leading-relaxed text-ink md:text-3xl">
-              <span aria-hidden className="gold-text mr-1 text-5xl leading-none">
-                &ldquo;
-              </span>
-              {testimonials[0].quote}
-            </blockquote>
-            <p className="mt-8 text-sm font-bold uppercase tracking-[0.2em] text-navy">
-              {testimonials[0].attribution}
-              <span className="mt-1 block font-medium normal-case tracking-normal text-ink/60">
-                {testimonials[0].role}
-              </span>
-            </p>
+            <h2 className="mt-4 text-3xl font-bold uppercase tracking-tight text-navy md:text-4xl">
+              The room <span className="text-brand">remembers</span>
+            </h2>
+          </Reveal>
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {homeTestimonials.map((t, i) => (
+              <Reveal key={t.attribution} delay={i * 0.1}>
+                <TestimonialCard t={t} on="light" short />
+              </Reveal>
+            ))}
+          </div>
+          <Reveal className="mt-10 text-center">
+            <Link
+              href="/reviews"
+              className="inline-block rounded-md border-2 border-navy/40 px-8 py-4 text-sm font-bold uppercase tracking-[0.15em] text-navy transition-colors hover:border-brand hover:text-brand"
+            >
+              Read all {testimonials.length} reviews
+            </Link>
           </Reveal>
         </div>
       </section>

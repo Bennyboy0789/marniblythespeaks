@@ -23,6 +23,7 @@ const links = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About Marni" },
   { href: "/speaking", label: "Speaking & Programs" },
+  { href: "/reviews", label: "Reviews" },
   { href: "/contact", label: "Book Marni" },
   { href: "/contact", label: "Request the Speaker Packet" },
   { href: "/privacy", label: "Privacy Policy" },
@@ -38,7 +39,7 @@ export default function Footer() {
           </p>
           <ul className="mt-4 space-y-2.5">
             {links.map((l) => (
-              <li key={l.href}>
+              <li key={l.label}>
                 <Link
                   href={l.href}
                   className="text-sm text-white/75 transition-colors hover:text-gold"

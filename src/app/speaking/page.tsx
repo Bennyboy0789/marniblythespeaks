@@ -7,7 +7,7 @@ import Reveal from "@/components/Reveal";
 import { industries } from "@/lib/industries";
 import { programs, reasonsToBook, signatureKeynote } from "@/lib/programs";
 import { pageMetadata } from "@/lib/seo";
-import { testimonials } from "@/lib/testimonials";
+import { speakingTestimonial } from "@/lib/testimonials";
 
 export const metadata: Metadata = pageMetadata({
   title: "Keynote Speaker & Leadership Programs",
@@ -109,12 +109,18 @@ export default function Speaking() {
       <section className="section-dark border-t border-white/5">
         <Reveal className="mx-auto max-w-3xl px-5 py-14 text-center md:py-16">
           <blockquote className="font-serif text-xl italic leading-relaxed text-white/85">
-            &ldquo;{testimonials[0].quote}&rdquo;
+            &ldquo;{speakingTestimonial.quote}&rdquo;
           </blockquote>
           <p className="mt-6 text-xs font-bold uppercase tracking-[0.2em] text-gold">
-            {testimonials[0].attribution} ·{" "}
-            <span className="text-white/60">{testimonials[0].role}</span>
+            {speakingTestimonial.attribution} ·{" "}
+            <span className="text-white/60">{speakingTestimonial.role}</span>
           </p>
+          <Link
+            href="/reviews"
+            className="mt-6 inline-block text-sm font-bold uppercase tracking-[0.15em] text-lavender transition-colors hover:text-white"
+          >
+            Read all reviews &rarr;
+          </Link>
         </Reveal>
       </section>
 

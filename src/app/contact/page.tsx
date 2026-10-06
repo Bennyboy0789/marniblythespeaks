@@ -17,11 +17,11 @@ export const metadata: Metadata = pageMetadata({
 const faqs = [
   {
     q: "How far in advance should we book?",
-    a: "Most dates book three to six months out — but ask about your date either way. If Marni can make it work, she will.",
+    a: "Most dates book three to six months out, but ask about your date either way. If Marni can make it work, she will.",
   },
   {
     q: "Can Marni present virtually or hybrid?",
-    a: "Yes. Every program has an in-person, virtual, and hybrid format, and the virtual version is built for the screen — not a keynote pointed at a webcam.",
+    a: "Yes. Every program has an in-person, virtual, and hybrid format, and the virtual version is built for the screen, not a keynote pointed at a webcam.",
   },
   {
     q: "Will the talk be customized to our event?",
@@ -33,7 +33,7 @@ const faqs = [
   },
   {
     q: "What does it cost?",
-    a: "Fees vary by format, date, and event type. Send an inquiry and you'll get clear numbers within 24 hours — including exactly what's covered.",
+    a: "Fees vary by format, date, and event type. Send an inquiry and you'll get clear numbers within 24 hours, including exactly what's covered.",
   },
 ];
 
@@ -57,7 +57,7 @@ export default function Contact() {
       <section className="stage-glow text-white">
         <Reveal className="mx-auto max-w-4xl px-5 py-16 text-center md:py-24">
           <h1 className="text-4xl font-bold uppercase leading-tight tracking-tight md:text-5xl">
-            Book Marni for{" "}
+            Bring Marni to{" "}
             <span className="gradient-text">Your Next Event</span>
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/80">
@@ -98,7 +98,7 @@ export default function Contact() {
                 Speaker Packet
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-white/70">
-                Topics, formats, bio, and everything your event team needs —
+                Topics, formats, bio, and everything your event team needs,
                 in one committee-ready PDF, sent straight to your inbox.
               </p>
               {/* CRO: direct download disabled while the packet PDF is a
@@ -154,7 +154,7 @@ export default function Contact() {
             {[
               {
                 title: "You inquire",
-                body: "Send the form, email, or grab a discovery call slot. You'll hear back within 24 hours — usually faster.",
+                body: "Send the form, email, or grab a discovery call slot. You'll hear back within 24 hours, usually faster.",
               },
               {
                 title: "Discovery call",
@@ -165,7 +165,7 @@ export default function Contact() {
                 body: "The keynote gets rebuilt around your industry, your event theme, and the outcomes you're after. You'll know exactly what's coming.",
               },
               {
-                title: "Show time — and after",
+                title: "Show time, and after",
                 body: "Marni arrives early, works the room, and stays after. Your audience leaves with tools for Monday morning, not just a good feeling.",
               },
             ].map((s, i) => (

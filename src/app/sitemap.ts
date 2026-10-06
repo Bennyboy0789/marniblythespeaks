@@ -8,18 +8,19 @@ const BASE = "https://marniblythespeaks.com";
 // timestamp carries no freshness signal and eventually gets discounted).
 const LAUNCH = "2026-08-13";
 const REVIEWS_UPDATE = "2026-10-05";
+const BRIEF_UPDATE = "2026-10-05";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
-    { url: BASE, lastModified: REVIEWS_UPDATE },
-    { url: `${BASE}/speaking`, lastModified: REVIEWS_UPDATE },
+    { url: BASE, lastModified: BRIEF_UPDATE },
+    { url: `${BASE}/speaking`, lastModified: BRIEF_UPDATE },
     { url: `${BASE}/reviews`, lastModified: REVIEWS_UPDATE },
     { url: `${BASE}/contact`, lastModified: LAUNCH },
-    { url: `${BASE}/about`, lastModified: LAUNCH },
+    { url: `${BASE}/about`, lastModified: BRIEF_UPDATE },
     { url: `${BASE}/privacy`, lastModified: LAUNCH },
     ...industries.map((i) => ({
       url: `${BASE}/speaking/${i.slug}`,
-      lastModified: LAUNCH,
+      lastModified: BRIEF_UPDATE,
     })),
   ];
 }

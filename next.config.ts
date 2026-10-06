@@ -14,6 +14,15 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // Industries retired Oct 2026 (Marni's brief: Healthcare, Corporate,
+  // Education, Real Estate). Keep any links/rankings landing somewhere useful.
+  async redirects() {
+    return ["insurance", "financial-services", "tech"].map((slug) => ({
+      source: `/speaking/${slug}`,
+      destination: "/speaking",
+      permanent: true,
+    }));
+  },
   async headers() {
     return [
       { source: "/(.*)", headers: securityHeaders },

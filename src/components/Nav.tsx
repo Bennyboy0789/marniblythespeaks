@@ -44,7 +44,7 @@ export default function Nav() {
           Marni Blythe <span className="gold-text">Speaks</span>
         </Link>
 
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-7 lg:flex">
           {links.map((l) => (
             <Link
               key={l.href}
@@ -54,11 +54,21 @@ export default function Nav() {
               {l.label}
             </Link>
           ))}
+          {/* Planner feedback: the packet is what gets forwarded to the
+              committee, so it lives in the nav too */}
           <Link
             href="/contact"
+            data-track="cta_packet_request"
+            className="text-sm font-bold uppercase tracking-[0.12em] text-gold transition-colors hover:text-white"
+          >
+            Speaker Packet
+          </Link>
+          <Link
+            href="/contact"
+            data-track="cta_book_marni"
             className="btn-shine rounded-md bg-gradient-to-r from-brand-bright to-violet px-5 py-2.5 text-xs font-bold uppercase tracking-[0.15em] text-white shadow-[0_0_25px_-5px_rgba(124,58,237,0.8)] transition hover:brightness-110 hover:shadow-[0_0_35px_-5px_rgba(124,58,237,1)]"
           >
-            Book Marni
+            Bring Marni to Your Event
           </Link>
         </div>
 
@@ -67,7 +77,7 @@ export default function Nav() {
           type="button"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
-          className="flex h-10 w-10 items-center justify-center text-white md:hidden"
+          className="flex h-10 w-10 items-center justify-center text-white lg:hidden"
           onClick={() => setOpen(!open)}
         >
           <svg
@@ -89,7 +99,7 @@ export default function Nav() {
       </nav>
 
       {open && (
-        <div className="border-t border-white/10 bg-abyss px-5 pb-6 pt-2 md:hidden">
+        <div className="border-t border-white/10 bg-abyss px-5 pb-6 pt-2 lg:hidden">
           {links.map((l) => (
             <Link
               key={l.href}
@@ -105,7 +115,15 @@ export default function Nav() {
             className="mt-3 block rounded-md bg-gradient-to-r from-brand-bright to-violet px-5 py-3 text-center text-sm font-bold uppercase tracking-[0.15em] text-white"
             onClick={() => setOpen(false)}
           >
-            Book Marni
+            Bring Marni to Your Event
+          </Link>
+          <Link
+            href="/contact"
+            data-track="cta_packet_request"
+            className="mt-3 block rounded-md border-2 border-gold/60 px-5 py-3 text-center text-sm font-bold uppercase tracking-[0.15em] text-gold"
+            onClick={() => setOpen(false)}
+          >
+            Request Speaker Packet
           </Link>
         </div>
       )}

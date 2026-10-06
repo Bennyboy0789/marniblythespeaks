@@ -11,7 +11,7 @@ export default function NotFound() {
           This page left the stage
         </h1>
         <p className="mt-5 max-w-md leading-relaxed text-white/75">
-          The page you&apos;re looking for doesn&apos;t exist — or it moved on
+          The page you&apos;re looking for doesn&apos;t exist, or it moved on
           to bigger rooms. Here&apos;s where to go instead.
         </p>
         <div className="mt-10 flex flex-col gap-4 sm:flex-row">
@@ -19,7 +19,7 @@ export default function NotFound() {
             href="/contact"
             className="rounded-md bg-gradient-to-r from-brand-bright to-violet px-8 py-4 text-sm font-bold uppercase tracking-[0.15em] text-white shadow-[0_0_35px_-5px_rgba(124,58,237,0.7)] transition hover:brightness-110"
           >
-            Book Marni
+            Bring Marni to Your Event
           </Link>
           <Link
             href="/speaking"

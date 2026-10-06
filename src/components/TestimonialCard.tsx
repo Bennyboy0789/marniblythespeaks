@@ -6,6 +6,8 @@ type Props = {
   on?: "dark" | "light";
   /** render the verbatim excerpt (when one exists) instead of the full quote */
   short?: boolean;
+  /** buyer-validation layout: title/org above the name, large and colored */
+  emphasizeRole?: boolean;
   className?: string;
 };
 
@@ -13,6 +15,7 @@ export default function TestimonialCard({
   t,
   on = "dark",
   short = false,
+  emphasizeRole = false,
   className = "",
 }: Props) {
   const text = short && t.excerpt ? t.excerpt : t.quote;
@@ -39,6 +42,15 @@ export default function TestimonialCard({
         ))}
       </blockquote>
       <figcaption className="mt-6">
+        {emphasizeRole && t.role && (
+          <span
+            className={`mb-1 block text-lg font-bold uppercase tracking-wide ${
+              dark ? "gold-text" : "text-brand"
+            }`}
+          >
+            {t.role}
+          </span>
+        )}
         <span
           className={`block text-sm font-bold uppercase tracking-[0.15em] ${
             dark ? "text-gold" : "text-navy"
@@ -46,7 +58,7 @@ export default function TestimonialCard({
         >
           {t.attribution}
         </span>
-        {t.role && (
+        {t.role && !emphasizeRole && (
           <span
             className={`mt-1 block text-sm ${dark ? "text-white/60" : "text-ink/60"}`}
           >

@@ -19,9 +19,9 @@ export default function CtaPair({ on = "dark", className = "" }: Props) {
         data-track="cta_book_marni"
         className="btn-shine rounded-md bg-gradient-to-r from-brand-bright via-violet to-brand-bright bg-[length:200%_auto] px-8 py-4 text-center text-sm font-bold uppercase tracking-[0.15em] text-white shadow-[0_0_35px_-5px_rgba(124,58,237,0.7)] transition-all duration-300 hover:bg-[position:right_center] hover:shadow-[0_0_50px_-5px_rgba(124,58,237,0.9)]"
       >
-        Book Marni
+        Bring Marni to Your Event
       </Link>
-      {/* CRO: packet PDF is a placeholder — route requests through contact
+      {/* CRO: packet PDF is a placeholder, so route requests through contact
           until the real one-sheet ships, then restore /speaker-packet.pdf */}
       <Link
         href="/contact"

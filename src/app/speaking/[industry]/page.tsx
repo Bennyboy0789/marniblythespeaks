@@ -4,8 +4,10 @@ import { Link } from "next-view-transitions";
 import { notFound } from "next/navigation";
 import CtaPair from "@/components/CtaPair";
 import Reveal from "@/components/Reveal";
+import TestimonialCard from "@/components/TestimonialCard";
 import { getIndustry, industries } from "@/lib/industries";
 import { pageMetadata } from "@/lib/seo";
+import { testimonialBy } from "@/lib/testimonials";
 
 export function generateStaticParams() {
   return industries.map((i) => ({ industry: i.slug }));
@@ -30,6 +32,7 @@ export default async function IndustryPage({
   const { industry } = await params;
   const ind = getIndustry(industry);
   if (!ind) notFound();
+  const quote = ind.testimonial ? testimonialBy(ind.testimonial) : undefined;
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -111,6 +114,14 @@ export default async function IndustryPage({
         </div>
       </section>
 
+      {quote && (
+        <section className="section-dark border-t border-white/5">
+          <Reveal className="mx-auto max-w-3xl px-5 py-14 md:py-16">
+            <TestimonialCard t={quote} emphasizeRole />
+          </Reveal>
+        </section>
+      )}
+
       {/* Keynote fit */}
       <section className="section-purple">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 md:grid-cols-2 md:py-28">
@@ -128,11 +139,11 @@ export default async function IndustryPage({
               The Talk
             </p>
             <h2 className="text-3xl font-bold uppercase tracking-tight text-white md:text-4xl">
-              <span className="gradient-text">Human Intelligence</span> in the
-              Age of AI
+              <span className="gradient-text">Human Intelligence</span> in an
+              AI World
             </h2>
             <p className="mt-5 leading-relaxed text-white/80">
-              Not another AI talk — and never a generic one. Every booking
+              Not another AI talk, and never a generic one. Every booking
               starts with a discovery call with your leadership, and the
               keynote gets rebuilt in {ind.name.toLowerCase()}&apos;s language:
               your scenarios, your pressures, your wins.
@@ -144,10 +155,17 @@ export default async function IndustryPage({
               {ind.fit}
             </p>
             <Link
+              href="/speaking"
+              className="mt-6 block text-sm font-bold uppercase tracking-[0.15em] text-gold underline underline-offset-8 hover:text-white"
+            >
+              See all four talks →
+            </Link>
+            <Link
               href="/contact"
+              data-track="cta_book_marni"
               className="btn-shine mt-8 inline-block rounded-md bg-gradient-to-r from-brand-bright to-violet px-8 py-4 text-sm font-bold uppercase tracking-[0.15em] text-white shadow-lg shadow-brand-bright/25 transition hover:brightness-110"
             >
-              Book This Program
+              Bring Marni to Your Event
             </Link>
           </Reveal>
         </div>

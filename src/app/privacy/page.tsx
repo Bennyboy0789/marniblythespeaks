@@ -30,7 +30,7 @@ export default function Privacy() {
               your name, email address, organization, event details, and your
               message. This site also uses privacy-friendly, cookieless
               analytics (Vercel Analytics) that collect aggregate page-view and
-              interaction data — not your identity.
+              interaction data, not your identity.
             </p>
           </div>
           <div>
@@ -49,9 +49,9 @@ export default function Privacy() {
               Who we share it with
             </h2>
             <p className="mt-2">
-              Service providers who make this site work — form and email
+              Service providers who make this site work (form and email
               delivery (Resend), hosting and analytics (Vercel), and scheduling
-              tools — receive only what they need to perform those services.
+              tools) receive only what they need to perform those services.
             </p>
           </div>
           <div>

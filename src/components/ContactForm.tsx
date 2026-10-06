@@ -31,7 +31,7 @@ function validate(data: Record<string, string>): Errors {
   if (!data.name?.trim()) errors.name = "Please tell us your name.";
   if (!data.email?.trim()) errors.email = "We need an email to reply to.";
   else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))
-    errors.email = "That email doesn't look right — double-check it?";
+    errors.email = "That email doesn't look right. Double-check it?";
   if (!data.eventType) errors.eventType = "Pick the closest event type.";
   if (!data.message?.trim())
     errors.message = "A sentence or two about your event helps us reply fast.";
@@ -70,11 +70,11 @@ export default function ContactForm() {
       throw new Error(`status ${res.status}`);
     } catch {
       // Endpoint not configured yet (or offline) — open a pre-filled draft.
-      const subject = `Speaking inquiry — ${data.eventType} — ${data.organization || data.name}`;
+      const subject = `Speaking inquiry: ${data.eventType} | ${data.organization || data.name}`;
       const body = [
         `Name: ${data.name}`,
         `Email: ${data.email}`,
-        `Organization: ${data.organization || "—"}`,
+        `Organization: ${data.organization || "(not given)"}`,
         `Event type: ${data.eventType}`,
         `Event date: ${data.eventDate || "TBD"}`,
         "",
@@ -95,7 +95,7 @@ const errClass = "mt-1.5 block text-xs font-medium text-[#ef8a8a]";
           Got it. You&apos;re on the list.
         </p>
         <p className="mx-auto mt-4 max-w-md leading-relaxed text-white/80">
-          Your inquiry is in — check your inbox for a confirmation. You&apos;ll
+          Your inquiry is in. Check your inbox for a confirmation. You&apos;ll
           hear from us within 24 hours (usually faster) with clear next steps.
         </p>
       </div>
@@ -183,7 +183,7 @@ const errClass = "mt-1.5 block text-xs font-medium text-[#ef8a8a]";
 
       {status === "fallback" && (
         <p className="rounded-md border border-gold/40 bg-gold/10 px-4 py-3 text-sm text-gold">
-          Your email app should have opened with everything filled in — just
+          Your email app should have opened with everything filled in. Just
           hit send. If it didn&apos;t, email us directly at{" "}
           <a href={`mailto:${BOOKING_EMAIL}`} className="font-bold underline">
             {BOOKING_EMAIL}

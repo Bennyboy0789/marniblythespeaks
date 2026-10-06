@@ -21,12 +21,12 @@ const dmSans = DM_Sans({
 });
 
 const SITE_DESCRIPTION =
-  "Keynote speaker Marni Blythe equips leaders to read the room, build trust, and get people thinking — the skill that moves organizations forward is HI, not AI.";
+  "Keynote speaker Marni Blythe helps healthcare and corporate leaders communicate better, build stronger cultures, and grow predictably with Human Intelligence.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://marniblythespeaks.com"),
   title: {
-    default: "Marni Blythe Speaks — Human Intelligence in the Age of AI",
+    default: "Marni Blythe Speaks | Keynote Speaker for Healthcare and Corporate Leaders",
     template: "%s | Marni Blythe Speaks",
   },
   description: SITE_DESCRIPTION,
@@ -39,14 +39,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Marni Blythe Speaks",
-    title: "Marni Blythe Speaks — Human Intelligence in the Age of AI",
+    title: "Marni Blythe Speaks | Keynote Speaker for Healthcare and Corporate Leaders",
     description: SITE_DESCRIPTION,
     url: "/",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Marni Blythe Speaks — Human Intelligence in the Age of AI",
+    title: "Marni Blythe Speaks | Keynote Speaker for Healthcare and Corporate Leaders",
     description: SITE_DESCRIPTION,
     images: ["/og-image.png"],
   },
@@ -65,7 +65,7 @@ const orgJsonLd = {
       url: "https://marniblythespeaks.com",
       logo: "https://marniblythespeaks.com/icon-512.png",
       description:
-        "Keynote speaking and leadership programs built around Human Intelligence in the Age of AI — equipping organizations across education, insurance, financial services, technology, and corporate America to build cultures where people think instead of just execute.",
+        "Keynote speaking and leadership programs built around Human Intelligence, equipping healthcare and corporate leaders, and organizations across education and real estate, to communicate better, build stronger cultures, and grow predictably.",
       email: "hello@marniblythespeaks.com",
       telephone: "+1-646-413-4872",
       founder: { "@id": "https://marniblythespeaks.com/about#marni-blythe" },

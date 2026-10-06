@@ -7,9 +7,9 @@ import Reveal from "@/components/Reveal";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "About Marni Blythe — Keynote Speaker",
+  title: "About Marni Blythe, Keynote Speaker",
   description:
-    "Meet keynote speaker Marni Blythe — operator, Culture Catalyst co-author, and the voice behind Human Intelligence in the Age of AI.",
+    "Meet keynote speaker Marni Blythe: operator, fractional executive, Culture Catalyst co-author, and the voice behind Human Intelligence.",
   path: "/about",
 });
 
@@ -22,7 +22,7 @@ const personJsonLd = {
   image: "https://marniblythespeaks.com/images/marni-portrait-1.jpg",
   jobTitle: "Keynote Speaker",
   description:
-    "Marni Blythe is a keynote speaker and the voice behind Human Intelligence in the Age of AI — the umbrella for everything she teaches about leadership, communication, and culture. She spent 25 years leading and rebuilding organizations — Fortune 500 marketing, her own agency, and years as a fractional COO/CMO through her firm Full Pocket Coaching — and co-authored the Amazon best-selling book Culture Catalyst.",
+    "Marni Blythe is a keynote speaker and the voice behind Human Intelligence, the umbrella for everything she teaches about leadership, communication, and culture. She spent more than 25 years leading, building, and rebuilding organizations, from Fortune 500 marketing and her own agency to serving as a fractional executive inside surgical practices and growing businesses through her firm Full Pocket Coaching, and co-authored the Amazon best-selling book Culture Catalyst.",
   worksFor: { "@id": "https://marniblythespeaks.com/#organization" },
   knowsAbout: [
     "Human Intelligence",
@@ -63,7 +63,7 @@ const lives = [
   },
   {
     letter: "S",
-    value: "Strive to Grow — or We Die",
+    value: "Strive to Grow or We Die",
     body: "Comfort is the enemy of every great team. Growth isn't optional; it's the whole point.",
   },
 ];
@@ -89,8 +89,8 @@ export default function About() {
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-white/85">
               Marni Blythe is a keynote speaker and the voice behind Human
-              Intelligence in the Age of AI — the umbrella for everything she
-              teaches about leadership, communication, and culture.
+              Intelligence, the umbrella for everything she teaches about
+              leadership, communication, and culture.
             </p>
           </Reveal>
           <Reveal delay={0.15} className="relative mt-4 self-end md:col-span-2 md:mt-0">
@@ -156,25 +156,25 @@ export default function About() {
             <p>
               Then AI arrived, and every organization started asking what
               machines could do. Marni started asking the better question: what
-              can only your people do? She named it Human Intelligence — HI —
+              can only your people do? She named it Human Intelligence (HI),
               and it became the through-line for every stage she steps on. She
               co-authored the Amazon best seller <em>Culture Catalyst</em>{" "}
               because the message needed to travel further than one stage at a
               time.
             </p>
             <p>
-              Today Marni speaks to organizations across education, insurance,
-              financial services, tech, and corporate America. Those worlds
+              Today Marni speaks to healthcare and corporate leaders, and to
+              organizations across education and real estate. Those worlds
               look nothing alike on paper, but the human part is identical:
               people do their best work when they feel led, trusted, and
-              connected — so the work travels anywhere people are building
+              connected. So the work travels anywhere people are building
               something together.
             </p>
             <p>
               Off the clock, she&apos;s a bio-hacking CrossFit yogi, married
               with three daughters and two Maltese, always chasing the next
               trip to Aruba. On the clock, she believes the leader your team
-              needs is already in there — in every person on the payroll,
+              needs is already in there, in every person on the payroll,
               waiting for someone to bring it forward.
             </p>
           </Reveal>
@@ -215,7 +215,7 @@ export default function About() {
               L.I.V.E.S.
             </h2>
             <p className="mx-auto mt-4 max-w-xl leading-relaxed text-white/70">
-              The framework behind everything Marni teaches — and how she runs
+              The framework behind everything Marni teaches, and how she runs
               her own work.
             </p>
           </Reveal>
@@ -242,7 +242,7 @@ export default function About() {
       </section>
 
       {/* In Print — first linked, verifiable press credential (audit item).
-          Lives on About (not home) per the de-emphasize-healthcare direction. */}
+          Lives on About; the home page brief (Oct 2026) does not include it. */}
       <section className="section-dark border-t border-white/5">
         <div className="mx-auto grid max-w-5xl items-center gap-12 px-5 py-20 md:grid-cols-5 md:py-24">
           <Reveal className="mx-auto w-full max-w-[260px] md:col-span-2">
@@ -269,12 +269,12 @@ export default function About() {
               In Print
             </p>
             <h2 className="text-3xl font-bold uppercase tracking-tight text-white md:text-4xl">
-              On the cover — and{" "}
+              On the cover, and{" "}
               <span className="gradient-text">she wrote the story</span>
             </h2>
             <p className="mt-5 leading-relaxed text-white/80">
               Marni is the Summer 2026 cover of{" "}
-              <em>Dental Entrepreneur Woman</em> — and the author of its cover
+              <em>Dental Entrepreneur Woman</em> and the author of its cover
               story, &ldquo;The Power of the Pivot,&rdquo; on rebuilding
               yourself and your business when the old playbook stops working.
             </p>

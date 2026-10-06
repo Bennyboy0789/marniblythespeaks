@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Marni Blythe Speaks",
     short_name: "MB Speaks",
     description:
-      "Keynote speaker Marni Blythe — Human Intelligence in the Age of AI.",
+      "Keynote speaker Marni Blythe: Human Intelligence for healthcare and corporate leaders.",
     start_url: "/",
     display: "browser",
     background_color: "#0d0916",

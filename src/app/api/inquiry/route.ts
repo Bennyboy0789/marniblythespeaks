@@ -69,7 +69,7 @@ export async function POST(req: Request) {
   const lines = [
     `Name: ${data.name}`,
     `Email: ${data.email}`,
-    `Organization: ${data.organization || "—"}`,
+    `Organization: ${data.organization || "(not given)"}`,
     `Event type: ${data.eventType}`,
     `Event date: ${data.eventDate || "TBD"}`,
     "",
@@ -81,7 +81,7 @@ export async function POST(req: Request) {
       from: FROM,
       to: [TO],
       reply_to: data.email,
-      subject: `Speaking inquiry — ${data.eventType} — ${data.organization || data.name}`,
+      subject: `Speaking inquiry: ${data.eventType} | ${data.organization || data.name}`,
       text: lines,
     });
   } catch {
@@ -94,11 +94,11 @@ export async function POST(req: Request) {
     await sendEmail(key, {
       from: FROM,
       to: [data.email],
-      subject: "Got it — your inquiry reached Marni Blythe Speaks",
+      subject: "Got it! Your inquiry reached Marni Blythe Speaks",
       text: [
         `Hi ${data.name.split(" ")[0]},`,
         "",
-        "Thanks for reaching out about your event — your inquiry is in.",
+        "Thanks for reaching out about your event. Your inquiry is in.",
         "You'll hear back from us within 24 hours (usually faster) with clear",
         "next steps and answers to anything you asked.",
         "",

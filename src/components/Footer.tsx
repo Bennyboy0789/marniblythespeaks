@@ -24,7 +24,7 @@ const links = [
   { href: "/about", label: "About Marni" },
   { href: "/speaking", label: "Speaking & Programs" },
   { href: "/reviews", label: "Reviews" },
-  { href: "/contact", label: "Book Marni" },
+  { href: "/contact", label: "Bring Marni to Your Event" },
   { href: "/contact", label: "Request the Speaker Packet" },
   { href: "/privacy", label: "Privacy Policy" },
 ];

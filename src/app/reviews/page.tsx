@@ -6,9 +6,9 @@ import { pageMetadata } from "@/lib/seo";
 import { testimonials } from "@/lib/testimonials";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Reviews — Keynote Speaker Marni Blythe",
+  title: "Reviews of Keynote Speaker Marni Blythe",
   description:
-    "What CEOs, event organizers, and audiences say after booking keynote speaker Marni Blythe — in their own words.",
+    "What CEOs, event organizers, and audiences say after booking keynote speaker Marni Blythe, in their own words.",
   path: "/reviews",
 });
 
@@ -33,7 +33,7 @@ export default function Reviews() {
           </h1>
           <p className="rise rise-3 mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/80">
             {testimonials.length} reviews from CEOs, event organizers, and the
-            people in the seats — in their own words.
+            people in the seats, in their own words.
           </p>
           <div className="rise rise-4 mt-10 flex flex-col items-center gap-6">
             <CtaPair on="dark" className="justify-center" />

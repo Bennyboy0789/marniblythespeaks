@@ -4,15 +4,23 @@ import { Link } from "next-view-transitions";
 import CtaPair from "@/components/CtaPair";
 import HiDefinition from "@/components/HiDefinition";
 import Reveal from "@/components/Reveal";
+import YouTubeEmbed from "@/components/YouTubeEmbed";
 import { industries } from "@/lib/industries";
-import { programs, reasonsToBook, signatureKeynote } from "@/lib/programs";
+import { SPEAKER_REEL_ID } from "@/lib/media";
+import {
+  allTalks,
+  type Program,
+  programs,
+  reasonsToBook,
+  signatureKeynote,
+} from "@/lib/programs";
 import { pageMetadata } from "@/lib/seo";
 import { speakingTestimonial } from "@/lib/testimonials";
 
 export const metadata: Metadata = pageMetadata({
   title: "Keynote Speaker & Leadership Programs",
   description:
-    "Keynote speaker Marni Blythe's signature talk — Human Intelligence in the Age of AI — plus leadership, communication, and culture programs for every event.",
+    "Keynote speaker Marni Blythe's signature talk, Human Intelligence in an AI World, plus programs on predictable growth, culture, and high-stakes conversations.",
   path: "/speaking",
 });
 
@@ -20,13 +28,13 @@ const BASE = "https://marniblythespeaks.com";
 
 const servicesJsonLd = {
   "@context": "https://schema.org",
-  "@graph": [signatureKeynote, ...programs].map((p, i) => ({
+  "@graph": allTalks.map((p) => ({
     "@type": "Service",
-    "@id": `${BASE}/speaking#service-${i}`,
+    "@id": `${BASE}/speaking#${p.id}`,
     name: p.title,
     serviceType: p.signature ? "Keynote Speech" : "Keynote & Workshop",
-    url: `${BASE}/speaking`,
-    description: p.description,
+    url: `${BASE}/speaking#${p.id}`,
+    description: p.description.join(" "),
     provider: { "@id": `${BASE}/#organization` },
     areaServed: "Worldwide",
     audience: { "@type": "Audience", audienceType: p.audience },
@@ -38,6 +46,51 @@ const servicesJsonLd = {
   })),
 };
 
+/** Marni's buyer questions, answered for every talk (brief, section 9). */
+function BuyerAnswers({ p }: { p: Program }) {
+  return (
+    <dl className="mt-6 space-y-4 text-sm">
+      {[
+        ["What business problem does this solve?", p.problem],
+        ["Who is this designed for?", p.audience],
+        ["What will the audience leave able to do differently?", p.outcomes],
+        ["Formats", p.formats],
+      ].map(([q, a]) => (
+        <div key={q}>
+          <dt className="text-xs font-bold uppercase tracking-[0.2em] text-gold">
+            {q}
+          </dt>
+          <dd className="mt-1 leading-relaxed text-white/80">{a}</dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
+function Objectives({ p }: { p: Program }) {
+  return (
+    <details className="group mt-6 rounded-lg border border-white/10 bg-white/[0.03] px-5 py-4">
+      <summary className="flex cursor-pointer list-none items-center justify-between text-xs font-bold uppercase tracking-[0.2em] text-lavender">
+        Learning objectives
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          aria-hidden
+          className="fill-current transition-transform group-open:rotate-180"
+        >
+          <path d="M7 10l5 5 5-5z" />
+        </svg>
+      </summary>
+      <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-white/75">
+        {p.objectives.map((o) => (
+          <li key={o}>{o}</li>
+        ))}
+      </ul>
+    </details>
+  );
+}
+
 export default function Speaking() {
   return (
     <>
@@ -47,59 +100,49 @@ export default function Speaking() {
       />
       {/* Signature keynote hero. H1 carries page intent (de-duplicated from
           the Home H1 per audit); the keynote title is the visual h2. */}
-      <section className="stage-glow text-white">
+      <section id={signatureKeynote.id} className="stage-glow scroll-mt-20 text-white">
         <div className="mx-auto max-w-6xl px-5 py-16 md:py-24">
           <h1 className="mb-4 text-sm font-bold uppercase tracking-[0.3em] text-gold">
-            Keynote Speaking &amp; Programs — Signature Keynote
+            Keynote Speaking &amp; Programs · Signature Keynote
           </h1>
-          <div className="grid items-center gap-12 md:grid-cols-2">
+          <div className="grid items-start gap-12 md:grid-cols-2">
             <Reveal>
               <h2 className="text-4xl font-bold uppercase leading-tight tracking-tight md:text-5xl">
-                <span className="gradient-text">Human Intelligence</span> in the
-                Age of AI
+                <span className="gradient-text">Human Intelligence</span> in an
+                AI World
               </h2>
-              {/* Research: planners are fatigued by AI-hype keynotes — name the
-                  anti-position explicitly */}
-              <p className="mt-4 font-serif text-2xl italic text-gold">
-                Not another AI talk.
+              <p className="mt-4 font-serif text-xl italic leading-snug text-gold md:text-2xl">
+                {signatureKeynote.subtitle}
               </p>
-              <p className="mt-5 leading-relaxed text-white/80">
-                {signatureKeynote.description}
+              <div className="mt-5 space-y-4 leading-relaxed text-white/80">
+                {signatureKeynote.description.map((para) => (
+                  <p key={para}>{para}</p>
+                ))}
+              </div>
+              <p className="mt-6 border-l-2 border-gold/60 pl-5 font-serif text-lg italic leading-snug text-white">
+                {signatureKeynote.hook}
               </p>
-              <dl className="mt-8 space-y-4 text-sm">
-                <div>
-                  <dt className="text-xs font-bold uppercase tracking-[0.25em] text-gold">
-                    Ideal audience
-                  </dt>
-                  <dd className="mt-1 text-white/80">
-                    {signatureKeynote.audience}
-                  </dd>
-                </div>
-                <div>
-                  <dt className="text-xs font-bold uppercase tracking-[0.25em] text-gold">
-                    Formats
-                  </dt>
-                  <dd className="mt-1 text-white/80">
-                    {signatureKeynote.formats}
-                  </dd>
-                </div>
-              </dl>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl shadow-2xl shadow-brand/30">
+                <Image
+                  src="/images/marni-stage.png"
+                  alt="Marni Blythe delivering a keynote to a packed ballroom"
+                  fill
+                  priority
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <BuyerAnswers p={signatureKeynote} />
+              <Objectives p={signatureKeynote} />
               <Link
                 href="/contact"
+                data-track="cta_book_marni"
                 className="btn-shine mt-8 inline-block rounded-md bg-gradient-to-r from-brand-bright to-violet px-8 py-4 text-sm font-bold uppercase tracking-[0.15em] text-white shadow-lg shadow-brand-bright/25 transition hover:brightness-110"
               >
-                Book This Keynote
+                Bring This Keynote to Your Event
               </Link>
-            </Reveal>
-            <Reveal delay={0.15} className="relative aspect-[4/3] w-full overflow-hidden rounded-xl shadow-2xl shadow-brand/30">
-              <Image
-                src="/images/marni-stage.png"
-                alt="Marni Blythe delivering a keynote to a packed ballroom"
-                fill
-                priority
-                sizes="(min-width: 768px) 50vw, 100vw"
-                className="object-cover"
-              />
             </Reveal>
           </div>
         </div>
@@ -132,41 +175,45 @@ export default function Speaking() {
               The <span className="gradient-text">Programs</span>
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-center leading-relaxed text-white/70">
-              Keynotes energize and reframe. Workshops turn the ideas into
-              practice — real tools your team can act on before the coffee
-              gets cold. Every program is available in-person, virtual, or
-              hybrid.
+              Every keynote can stand alone and is customized to the audience,
+              organization, and outcomes you want to create. Keynotes energize
+              and reframe; workshops turn the ideas into practice. Every
+              program is available in-person, virtual, or hybrid.
             </p>
           </Reveal>
-          <div className="mt-12 grid gap-6 md:grid-cols-2">
-            {programs.map((p, i) => (
-              <Reveal key={p.title} delay={(i % 2) * 0.12} className="h-full">
-              <div className="card-lux flex h-full flex-col p-8">
-                <h3 className="text-xl font-bold uppercase tracking-wide text-white">
-                  {p.title}
-                </h3>
-                <p className="mt-4 flex-1 leading-relaxed text-white/75">
-                  {p.description}
-                </p>
-                <p className="mt-5 text-sm text-white/70">
-                  <span className="font-bold uppercase tracking-wider text-gold">
-                    Ideal for:
-                  </span>{" "}
-                  {p.audience}
-                </p>
-                <p className="mt-1 text-sm text-white/70">
-                  <span className="font-bold uppercase tracking-wider text-gold">
-                    Formats:
-                  </span>{" "}
-                  {p.formats}
-                </p>
-                <Link
-                  href="/contact"
-                  className="mt-6 inline-block self-start rounded-md border-2 border-brand-bright px-6 py-2.5 text-xs font-bold uppercase tracking-[0.15em] text-white transition-colors hover:bg-brand-bright"
+          <div className="mt-12 space-y-8">
+            {programs.map((p) => (
+              <Reveal key={p.id}>
+                <article
+                  id={p.id}
+                  className="card-lux grid scroll-mt-24 gap-8 p-8 md:p-10 lg:grid-cols-2"
                 >
-                  Inquire About This Program
-                </Link>
-              </div>
+                  <div>
+                    <h3 className="text-2xl font-bold uppercase tracking-wide text-white">
+                      {p.title}
+                    </h3>
+                    {p.subtitle && (
+                      <p className="mt-2 font-serif text-lg italic leading-snug text-gold">
+                        {p.subtitle}
+                      </p>
+                    )}
+                    <div className="mt-5 space-y-4 leading-relaxed text-white/75">
+                      {p.description.map((para) => (
+                        <p key={para}>{para}</p>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <BuyerAnswers p={p} />
+                    <Objectives p={p} />
+                    <Link
+                      href="/contact"
+                      className="mt-6 inline-block rounded-md border-2 border-brand-bright px-6 py-2.5 text-xs font-bold uppercase tracking-[0.15em] text-white transition-colors hover:bg-brand-bright"
+                    >
+                      Inquire About This Program
+                    </Link>
+                  </div>
+                </article>
               </Reveal>
             ))}
           </div>
@@ -198,11 +245,11 @@ export default function Speaking() {
               },
               {
                 title: "Your language, your examples",
-                body: "The talk gets rebuilt around your industry's reality — the scenarios, the vocabulary, the wins your people will actually recognize.",
+                body: "The talk gets rebuilt around your industry's reality: the scenarios, the vocabulary, the wins your people will actually recognize.",
               },
               {
                 title: "Built to outlast the applause",
-                body: "Every audience leaves with tools they use Monday morning — and workshop extensions are available when you want hands-on practice, not just inspiration.",
+                body: "Every audience leaves with tools they use Monday morning, and workshop extensions are available when you want hands-on practice, not just inspiration.",
               },
             ].map((s, i) => (
               <Reveal key={s.title} delay={i * 0.12} className="h-full">
@@ -258,29 +305,24 @@ export default function Speaking() {
               Watch Marni <span className="gradient-text">Speak</span>
             </h2>
           </Reveal>
-          {/* CRO: dashed placeholder tiles removed — swap this panel for a
-              3-up grid of embedded clips once the agency videos land */}
-          <Reveal delay={0.1}>
-            <div className="card-lux mx-auto mt-12 max-w-2xl p-10 text-center">
-              <p className="leading-relaxed text-white/80">
-                Speaking clips, audience moments, and shorts — new videos land
-                on the channel every month.
-              </p>
-              <a
-                href="https://www.youtube.com/@MarniBlytheSpeaks"
-                target="_blank"
-                rel="noopener noreferrer"
-                data-track="youtube_channel"
-                className="mt-6 inline-flex items-center gap-2.5 rounded-md border-2 border-gold/60 px-8 py-4 text-sm font-bold uppercase tracking-[0.15em] text-gold transition-all hover:bg-gold hover:text-abyss"
-              >
-                <svg width="14" height="14" viewBox="0 0 24 24" className="fill-current">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-                Watch on YouTube
-                <span className="sr-only"> (opens in new tab)</span>
-              </a>
-            </div>
+          <Reveal delay={0.1} className="mx-auto mt-12 max-w-4xl">
+            <YouTubeEmbed
+              id={SPEAKER_REEL_ID}
+              title="Marni Blythe speaker reel: Human Intelligence and leadership"
+            />
           </Reveal>
+          <p className="mt-8 text-center">
+            <a
+              href="https://www.youtube.com/@MarniBlytheSpeaks"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-track="youtube_channel"
+              className="inline-block text-sm font-bold uppercase tracking-[0.15em] text-gold underline underline-offset-8 hover:text-white"
+            >
+              More clips on YouTube →
+              <span className="sr-only"> (opens in new tab)</span>
+            </a>
+          </p>
         </div>
       </section>
 
@@ -289,7 +331,7 @@ export default function Speaking() {
         <div className="mx-auto max-w-6xl px-5 py-20 md:py-28">
           <Reveal>
             <h2 className="text-center text-3xl font-bold uppercase tracking-tight text-white md:text-4xl">
-              Reasons to <span className="gradient-text">Book Marni</span>
+              Reasons to <span className="gradient-text">Bring Marni In</span>
             </h2>
           </Reveal>
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

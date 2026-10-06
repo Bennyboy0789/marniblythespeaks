@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Image from "next/image";
 import { Link } from "next-view-transitions";
 import CountUp from "@/components/CountUp";
@@ -7,11 +8,22 @@ import HeroVideo from "@/components/HeroVideo";
 import HiDefinition from "@/components/HiDefinition";
 import InstagramFeed from "@/components/InstagramFeed";
 import Reveal from "@/components/Reveal";
+import TestimonialCard from "@/components/TestimonialCard";
+import YouTubeEmbed from "@/components/YouTubeEmbed";
 
 import { industries } from "@/lib/industries";
-import { programs } from "@/lib/programs";
-import TestimonialCard from "@/components/TestimonialCard";
-import { homeTestimonials, testimonials } from "@/lib/testimonials";
+import { SPEAKER_REEL_ID } from "@/lib/media";
+import { allTalks } from "@/lib/programs";
+import {
+  homeTestimonials,
+  operatorTestimonials,
+  reelTestimonial,
+  testimonials,
+} from "@/lib/testimonials";
+
+// Page order follows Marni's Oct 2026 homepage brief, written for the planner
+// weighing a ~$12K booking: who she's for, proof early, reel after programs.
+// Site-wide rule from Marni: NO EM DASHES in copy.
 
 const brandLogos = [
   { src: "/images/logos/Adidas.png", alt: "Adidas" },
@@ -26,6 +38,9 @@ const brandLogos = [
   { src: "/images/logos/Swatch.png", alt: "Swatch" },
   { src: "/images/logos/wicked.png", alt: "Wicked" },
   { src: "/images/logos/WakeTech.png", alt: "Wake Tech" },
+  // TODO: add healthcare logos (Chapel Hill Oral Surgery, Gaston Oral &
+  // Maxillofacial Surgery, Bright Direction Dental, Imagen Dental Partners,
+  // Seattle Study Club) once Marni supplies files + logo permission.
 ];
 
 const ecosystem = [
@@ -44,13 +59,24 @@ const ecosystem = [
 ];
 
 const industryIcons: Record<string, string> = {
-  education: "M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z",
-  insurance: "M12 2L4 5v6c0 5.55 3.4 10.74 8 12 4.6-1.26 8-6.45 8-12V5l-8-3z",
-  "financial-services": "M4 20h16v2H4v-2zm2-8h3v6H6v-6zm5-6h3v12h-3V6zm5 3h3v9h-3V9z",
-  tech: "M9 3v2H7a2 2 0 00-2 2v2H3v2h2v2H3v2h2v2a2 2 0 002 2h2v2h2v-2h2v2h2v-2h2a2 2 0 002-2v-2h2v-2h-2v-2h2V9h-2V7a2 2 0 00-2-2h-2V3h-2v2h-2V3H9zm-2 4h10v10H7V7z",
-  corporate: "M4 21V7l8-4 8 4v14h-6v-5h-4v5H4zm5-9h2V9H9v3zm4 0h2V9h-2v3z",
   healthcare: "M12 21s-8-5.33-8-11a5 5 0 019-3 5 5 0 019 3c0 5.67-8 11-8 11h-2z",
+  corporate: "M4 21V7l8-4 8 4v14h-6v-5h-4v5H4zm5-9h2V9H9v3zm4 0h2V9h-2v3z",
+  education: "M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z",
+  "real-estate": "M12 3L2 12h3v8h5v-6h4v6h5v-8h3L12 3z",
 };
+
+const stats: { value: ReactNode; label: string }[] = [
+  {
+    value: <CountUp value={25} suffix="+" />,
+    label: "Years leading, building, and rebuilding",
+  },
+  {
+    value: "Multiple Industries",
+    label: "Healthcare, corporate, education, associations, and professional services",
+  },
+  { value: "1 Big Idea", label: "Human Intelligence" },
+  { value: "Best-Selling Author", label: "Culture Catalyst" },
+];
 
 const bookJsonLd = {
   "@context": "https://schema.org",
@@ -70,13 +96,16 @@ const bookJsonLd = {
 };
 
 export default function Home() {
+  const featured = industries.filter((i) => i.featured);
+  const secondary = industries.filter((i) => !i.featured);
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(bookJsonLd) }}
       />
-      {/* ============ HERO ============ */}
+      {/* ============ 1. HERO ============ */}
       <section className="relative overflow-hidden bg-stage text-white">
         {/* Poster image always renders (mobile LCP); the 5.5MB video loads
             desktop-only via HeroVideo */}
@@ -90,8 +119,8 @@ export default function Home() {
           aria-hidden
         />
         <HeroVideo />
-        <div className="absolute inset-0 bg-gradient-to-t from-abyss via-stage/55 to-abyss/40" />
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-abyss/75 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-abyss via-stage/60 to-abyss/40" />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-r from-abyss/85 via-abyss/30 to-transparent" />
         {/* sweeping stage-light beams */}
         <div aria-hidden className="beam left-[8%]" />
         <div aria-hidden className="beam beam-2 right-[8%]" />
@@ -104,7 +133,7 @@ export default function Home() {
           aria-hidden
           className="float-pulse absolute bottom-0 right-[10%] h-[340px] w-[340px] rounded-full bg-gold/15 blur-[110px] [animation-delay:3s]"
         />
-        {/* Vertical name rail (desktop) — poster-editorial detail */}
+        {/* Vertical name rail (desktop), poster-editorial detail */}
         <div
           aria-hidden
           className="rise absolute left-7 top-1/2 hidden -translate-y-1/2 items-center gap-4 lg:flex lg:flex-col"
@@ -124,46 +153,58 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="rise rise-2">
-            <h1 className="font-bold uppercase leading-[0.9] tracking-tight">
-              <span className="gold-text block text-[clamp(3.4rem,11vw,10rem)]">
-                Human
-              </span>
-              <span className="gradient-text block text-[clamp(2.6rem,8.5vw,7.5rem)] md:ml-[7vw]">
-                Intelligence
-              </span>
-              <span className="mt-4 block text-[clamp(1rem,2.2vw,1.6rem)] font-bold uppercase tracking-[0.4em] text-white md:ml-[7vw]">
-                in the Age of <span className="gold-text">AI</span>
-              </span>
-            </h1>
-          </div>
+          {/* HI stays visible as the methodology brand line; the H1 says who
+              Marni is for and what changes (Marni's brief, section 1) */}
+          <p className="rise rise-2 font-bold uppercase leading-none tracking-tight">
+            <span className="gold-text mr-[0.15em] text-[clamp(1.6rem,3.6vw,3rem)]">Human</span>{" "}
+            <span className="gradient-text text-[clamp(1.6rem,3.6vw,3rem)]">
+              Intelligence
+            </span>
+          </p>
+          <h1 className="rise rise-2 mt-5 max-w-5xl font-bold uppercase leading-[1.02] tracking-tight">
+            <span className="block text-[clamp(1rem,1.9vw,1.4rem)] tracking-[0.25em] text-white/90">
+              Healthcare and Corporate Leaders:
+            </span>
+            <span className="mt-3 block text-[clamp(2.1rem,5.2vw,4.6rem)]">
+              Communicate Better, Build Stronger Cultures, and{" "}
+              <span className="gradient-text">Grow Predictably</span>
+            </span>
+          </h1>
 
           <div className="mt-10 flex flex-col gap-8 md:mt-12 md:flex-row md:items-end md:justify-between">
             <div className="rise rise-3 max-w-md border-l-2 border-gold/60 pl-5">
               <p className="text-base leading-relaxed text-white/85">
-                Keynotes and programs that equip leaders to read the room,
-                build trust, and get people thinking instead of just executing
-                — for leadership summits, culture resets, and every room
-                navigating AI.
+                Programs and keynotes for organizations committed to
+                high-performing leadership, thriving cultures, and the human
+                intelligence required to lead in a rapidly changing world.
               </p>
             </div>
-            {/* Research: dual hero CTA "Book + Watch" (Ryan Estis pattern) */}
-            <div className="rise rise-4 flex shrink-0 flex-col gap-4 sm:flex-row">
+            <div className="rise rise-4 flex shrink-0 flex-col items-stretch gap-4 sm:items-end">
+              <div className="flex flex-col gap-4 sm:flex-row">
+                <Link
+                  href="/contact"
+                  data-track="cta_book_marni"
+                  className="btn-shine rounded-md bg-gradient-to-r from-brand-bright via-violet to-brand-bright bg-[length:200%_auto] px-8 py-4 text-center text-sm font-bold uppercase tracking-[0.15em] text-white shadow-[0_0_35px_-5px_rgba(124,58,237,0.7)] transition-all duration-300 hover:bg-[position:right_center] hover:shadow-[0_0_50px_-5px_rgba(124,58,237,0.9)]"
+                >
+                  Bring Marni to Your Event
+                </Link>
+                <a
+                  href="#reel"
+                  className="flex items-center justify-center gap-2.5 rounded-md border-2 border-gold/60 px-8 py-4 text-sm font-bold uppercase tracking-[0.15em] text-gold transition-all hover:bg-gold hover:text-abyss hover:shadow-[0_0_35px_-5px_rgba(233,196,106,0.6)]"
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" className="fill-current">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                  Watch Marni Speak
+                </a>
+              </div>
               <Link
                 href="/contact"
-                className="btn-shine rounded-md bg-gradient-to-r from-brand-bright via-violet to-brand-bright bg-[length:200%_auto] px-8 py-4 text-center text-sm font-bold uppercase tracking-[0.15em] text-white shadow-[0_0_35px_-5px_rgba(124,58,237,0.7)] transition-all duration-300 hover:bg-[position:right_center] hover:shadow-[0_0_50px_-5px_rgba(124,58,237,0.9)]"
+                data-track="cta_packet_request"
+                className="text-center text-xs font-bold uppercase tracking-[0.2em] text-white/70 underline underline-offset-8 transition-colors hover:text-gold sm:text-right"
               >
-                Book Marni
+                Or request the speaker packet
               </Link>
-              <a
-                href="#reel"
-                className="flex items-center justify-center gap-2.5 rounded-md border-2 border-gold/60 px-8 py-4 text-sm font-bold uppercase tracking-[0.15em] text-gold transition-all hover:bg-gold hover:text-abyss hover:shadow-[0_0_35px_-5px_rgba(233,196,106,0.6)]"
-              >
-                <svg width="13" height="13" viewBox="0 0 24 24" className="fill-current">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-                Watch Marni
-              </a>
             </div>
           </div>
         </div>
@@ -197,13 +238,13 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ============ FEATURED BY ============ */}
+      {/* ============ 2. FEATURED BY ============ */}
       <FeaturedBy tone="purple" />
 
-      {/* ============ WHAT IS HI (canonical definition) ============ */}
+      {/* ============ 3. WHAT IS HI (canonical definition) ============ */}
       <HiDefinition />
 
-      {/* ============ INTRODUCING MARNI / THE SHIFT ============ */}
+      {/* ============ 4. INTRODUCING MARNI ============ */}
       <section className="section-dark overflow-hidden">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 md:grid-cols-2 md:py-28">
           <Reveal>
@@ -212,7 +253,7 @@ export default function Home() {
             </p>
             <h2 className="text-3xl font-bold uppercase leading-tight tracking-tight text-white md:text-4xl">
               Give her a room{" "}
-              <span className="font-light">and thirty minutes</span>
+              <span className="font-light">and as little as thirty minutes</span>
             </h2>
             <p className="mt-4 font-serif text-2xl italic leading-snug text-gold md:text-3xl">
               &ldquo;I&apos;ll introduce people to a part of themselves they
@@ -220,11 +261,28 @@ export default function Home() {
             </p>
             <p className="mt-6 text-lg leading-relaxed text-white/85">
               Give her a workshop, and your team builds something they&apos;re
-              still using a year later. Marni&apos;s core shift — from
-              &ldquo;How do I fix this?&rdquo; to &ldquo;What needs to change
-              so this stops happening?&rdquo; — is the difference between
-              managing problems and eliminating them.
+              still using a year later. Her core shift, from &ldquo;How do I
+              fix this?&rdquo; to &ldquo;What needs to change so this stops
+              happening?&rdquo;, is the difference between managing problems
+              and eliminating them.
             </p>
+            <div className="mt-10 border-t border-gold/30 pt-8">
+              <h3 className="text-xl font-bold uppercase tracking-[0.15em] text-white">
+                Speaker. <span className="gold-text">Executive.</span>{" "}
+                <span className="gradient-text">Operator.</span>
+              </h3>
+              <p className="mt-4 leading-relaxed text-white/80">
+                Marni brings more than keynote theory to the stage. She has
+                spent decades leading businesses, developing leaders, building
+                teams, navigating organizational change, and serving inside
+                companies as a fractional executive.
+              </p>
+              <p className="mt-4 leading-relaxed text-white/80">
+                Her leadership principles have been tested where they matter
+                most: inside real organizations with real people, real
+                pressure, and real business outcomes.
+              </p>
+            </div>
             <Link
               href="/about"
               className="mt-8 inline-block text-sm font-bold uppercase tracking-[0.15em] text-gold underline underline-offset-8 transition-colors hover:text-white"
@@ -252,19 +310,13 @@ export default function Home() {
       {/* ============ STATS BAND ============ */}
       <section className="section-purple relative overflow-hidden">
         <div aria-hidden className="hairline-gold absolute inset-x-0 top-0" />
-        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-16 text-center sm:grid-cols-3 md:py-20">
-          {[
-            // CRO: keep every number defensible — swap in Marni's real counts
-            // (events delivered, audiences reached) when she confirms them
-            { v: 25, suffix: "", label: "Years leading, building, and rebuilding" },
-            { v: 6, suffix: "", label: "Industry-tailored programs" },
-            { v: 1, suffix: "", label: "Big idea your audience will remember" },
-          ].map((s, i) => (
-            <Reveal key={s.label} delay={i * 0.12}>
-              <p className="gold-text font-serif text-6xl font-semibold md:text-7xl">
-                <CountUp value={s.v} suffix={s.suffix} />
+        <div className="mx-auto grid max-w-6xl gap-10 px-5 py-16 text-center sm:grid-cols-2 md:py-20 lg:grid-cols-4">
+          {stats.map((s, i) => (
+            <Reveal key={s.label} delay={i * 0.1} className="flex flex-col items-center">
+              <p className="gold-text flex min-h-[4.5rem] items-center text-balance font-serif text-4xl font-semibold leading-tight md:min-h-[6rem] md:text-[2.6rem]">
+                {s.value}
               </p>
-              <p className="mt-3 text-sm font-bold uppercase tracking-[0.2em] text-white/70">
+              <p className="mt-3 max-w-[16rem] text-sm font-bold uppercase tracking-[0.2em] text-white/70">
                 {s.label}
               </p>
             </Reveal>
@@ -273,44 +325,107 @@ export default function Home() {
         <div aria-hidden className="hairline-gold absolute inset-x-0 bottom-0" />
       </section>
 
-      {/* ============ INDUSTRIES ============ */}
-      <section className="section-dark border-t border-white/5">
+      {/* ============ 5. TESTIMONIAL PROOF (light relief section) ============
+          Marni's brief: three different orgs, CEO titles prominent. */}
+      <section className="texture-light">
+        <div className="mx-auto max-w-6xl px-5 py-20 md:py-24">
+          <Reveal className="mx-auto max-w-3xl text-center">
+            <p className="text-sm font-bold uppercase tracking-[0.3em] text-brand">
+              Senior leaders hire Marni. She delivers.
+            </p>
+            <h2 className="mt-4 text-3xl font-bold uppercase tracking-tight text-navy md:text-4xl">
+              Trusted by leaders who need{" "}
+              <span className="text-brand">more than inspiration</span>
+            </h2>
+          </Reveal>
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {homeTestimonials.map((t, i) => (
+              <Reveal key={t.attribution} delay={i * 0.1}>
+                <TestimonialCard t={t} on="light" short emphasizeRole />
+              </Reveal>
+            ))}
+          </div>
+          <Reveal className="mt-10 text-center">
+            <Link
+              href="/reviews"
+              className="inline-block rounded-md border-2 border-navy/40 px-8 py-4 text-sm font-bold uppercase tracking-[0.15em] text-navy transition-colors hover:border-brand hover:text-brand"
+            >
+              Read all {testimonials.length} reviews
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ============ 6. WHO MARNI SPEAKS TO ============
+          Healthcare + Corporate get full lanes with their own message (the
+          H1 names them); the other verticals sit beneath. */}
+      <section className="section-dark">
         <div className="mx-auto max-w-6xl px-5 py-20 md:py-24">
           <Reveal className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold uppercase tracking-tight text-white md:text-4xl">
               Who Marni <span className="gradient-text">Speaks To</span>
             </h2>
             <p className="mt-4 leading-relaxed text-white/70">
-              The technology changes by industry. The humans don&apos;t. Find
-              how Human Intelligence lands in your world.
+              The technology changes by industry. The humans don&apos;t.
             </p>
           </Reveal>
-          <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-            {industries.map((ind, i) => (
-              <Reveal key={ind.slug} delay={i * 0.06} className="h-full">
-              <Link
-                href={`/speaking/${ind.slug}`}
-                className="card-lux group flex h-full flex-col items-center gap-3 p-6 text-center"
-              >
-                <svg
-                  width="32"
-                  height="32"
-                  viewBox="0 0 24 24"
-                  className="fill-lavender transition-colors group-hover:fill-gold"
+          <div className="mt-12 grid gap-6 md:grid-cols-2">
+            {featured.map((ind, i) => (
+              <Reveal key={ind.slug} delay={i * 0.1} className="h-full">
+                <Link
+                  href={`/speaking/${ind.slug}`}
+                  className="card-lux group flex h-full flex-col p-8 md:p-10"
                 >
-                  <path d={industryIcons[ind.slug]} />
-                </svg>
-                <span className="text-sm font-bold uppercase tracking-wider text-white">
-                  {ind.shortName}
-                </span>
-              </Link>
+                  <svg
+                    width="40"
+                    height="40"
+                    viewBox="0 0 24 24"
+                    className="fill-lavender transition-colors group-hover:fill-gold"
+                    aria-hidden
+                  >
+                    <path d={industryIcons[ind.slug]} />
+                  </svg>
+                  <h3 className="mt-5 text-2xl font-bold uppercase tracking-wide text-white md:text-3xl">
+                    {ind.name}
+                  </h3>
+                  <p className="mt-4 flex-1 font-serif text-lg italic leading-relaxed text-white/80">
+                    {ind.teaser}
+                  </p>
+                  <span className="mt-6 text-xs font-bold uppercase tracking-[0.15em] text-gold transition-colors group-hover:text-white">
+                    {ind.name} keynotes →
+                  </span>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            {secondary.map((ind, i) => (
+              <Reveal key={ind.slug} delay={0.2 + i * 0.06} className="h-full">
+                <Link
+                  href={`/speaking/${ind.slug}`}
+                  className="card-lux group flex h-full items-center gap-4 px-6 py-5"
+                >
+                  <svg
+                    width="28"
+                    height="28"
+                    viewBox="0 0 24 24"
+                    className="shrink-0 fill-lavender transition-colors group-hover:fill-gold"
+                    aria-hidden
+                  >
+                    <path d={industryIcons[ind.slug]} />
+                  </svg>
+                  <span className="text-sm font-bold uppercase tracking-wider text-white">
+                    {ind.name}
+                  </span>
+                  <span aria-hidden className="ml-auto text-gold">→</span>
+                </Link>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ============ THE HI ECOSYSTEM ============ */}
+      {/* ============ 7. THE HI ECOSYSTEM ============ */}
       <section className="section-purple">
         <div className="mx-auto max-w-6xl px-5 py-20 md:py-28">
           <Reveal className="mx-auto max-w-2xl text-center">
@@ -322,7 +437,7 @@ export default function Home() {
               <span className="gradient-text">Human Intelligence</span>
             </h2>
             <p className="mt-4 leading-relaxed text-white/75">
-              Leadership isn&apos;t a title — it&apos;s how you show up, and
+              Leadership isn&apos;t a title. It&apos;s how you show up, and
               everyone is leading something, starting with themselves. When a
               whole team strengthens its Human Intelligence, the culture
               shifts from every seat at once, not just the top.
@@ -345,40 +460,41 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ THE PROGRAMS (breadth hedge) ============
-          ~40% of planner briefs are pure leadership/culture with no AI angle
-          (PCMA) — this teaser makes sure they see their talk before bouncing */}
-      <section className="section-dark border-t border-white/5">
+      {/* ============ 8. PROGRAMS ============ */}
+      <section className="section-dark">
         <div className="mx-auto max-w-6xl px-5 py-20 md:py-24">
           <Reveal className="mx-auto max-w-2xl text-center">
             <p className="mb-4 text-sm font-bold uppercase tracking-[0.3em] text-gold">
               The Programs
             </p>
             <h2 className="text-3xl font-bold uppercase tracking-tight text-white md:text-4xl">
-              Beyond the signature keynote —{" "}
-              <span className="gradient-text">four more talks</span>
+              Keynotes and <span className="gradient-text">workshops</span>
             </h2>
-            <p className="mt-4 leading-relaxed text-white/70">
-              Leadership, communication, culture, and execution — every
-              program bookable on its own, with or without the AI
-              conversation.
+            <p className="mt-4 leading-relaxed text-white/75">
+              Every keynote can stand alone and is customized to the audience,
+              organization, and outcomes you want to create.
             </p>
           </Reveal>
           <div className="mt-12 grid gap-6 sm:grid-cols-2">
-            {programs.map((p, i) => (
-              <Reveal key={p.title} delay={(i % 2) * 0.1} className="h-full">
+            {allTalks.map((p, i) => (
+              <Reveal key={p.id} delay={(i % 2) * 0.1} className="h-full">
                 <Link
-                  href="/speaking"
+                  href={`/speaking#${p.id}`}
                   className="card-lux group flex h-full flex-col p-7"
                 >
+                  {p.signature && (
+                    <span className="mb-3 self-start rounded-sm bg-gold/15 px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-gold">
+                      Signature keynote
+                    </span>
+                  )}
                   <h3 className="font-bold uppercase tracking-wide text-white">
                     {p.title}
                   </h3>
                   <p className="mt-3 flex-1 font-serif text-lg italic leading-snug text-white/75">
-                    {p.description.split(". ")[0]}.
+                    {p.hook}
                   </p>
                   <span className="mt-5 text-xs font-bold uppercase tracking-[0.15em] text-gold transition-colors group-hover:text-white">
-                    Explore the program →
+                    Who it&apos;s for and what changes →
                   </span>
                 </Link>
               </Reveal>
@@ -387,96 +503,46 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ VIDEO ============ */}
+      {/* ============ 9. SEE MARNI IN ACTION ============
+          Reel + Gary's quote side by side: the video proves "she can hold my
+          room", the quote says "yes, she can". */}
       <section id="reel" className="stage-glow scroll-mt-20 text-white">
-        <div className="mx-auto max-w-4xl px-5 py-20 text-center md:py-28">
-          <Reveal>
+        <div className="mx-auto max-w-6xl px-5 py-20 md:py-28">
+          <Reveal className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-bold uppercase tracking-tight md:text-4xl">
               See Marni <span className="gradient-text">in Action</span>
             </h2>
             <p className="mx-auto mt-4 max-w-xl leading-relaxed text-white/75">
-              Big-stage energy, real warmth. Watch how Human Intelligence lands
-              with a live audience.
+              Big-stage energy, real warmth.
             </p>
           </Reveal>
-          {/* Current speaker demo from fullpocketcoaching.com — swap for the
-              new agency-produced reel when it arrives (~5 weeks) */}
-          <Reveal delay={0.15} y={40}>
-            <video
-              controls
-              preload="metadata"
-              poster="/images/marni-conference.jpg"
-              className="mt-10 aspect-video w-full rounded-xl bg-black object-cover shadow-2xl shadow-brand/30"
-            >
-              <source src="/videos/speaker-demo.webm" type="video/webm" />
-            </video>
-          </Reveal>
-          <a
-            href="https://www.youtube.com/@MarniBlytheSpeaks"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-8 inline-block text-sm font-bold uppercase tracking-[0.15em] text-gold underline underline-offset-8 hover:text-white"
-          >
-            More clips on YouTube →
-            <span className="sr-only"> (opens in new tab)</span>
-          </a>
-        </div>
-      </section>
-
-      {/* ============ INSTAGRAM ============ */}
-      <section className="section-dark">
-        <div className="mx-auto max-w-6xl px-5 py-20 md:py-24">
-          <Reveal className="text-center">
-            <h2 className="text-3xl font-bold uppercase tracking-tight text-white md:text-4xl">
-              @marniblythespeaks
-            </h2>
-            <p className="mt-3 leading-relaxed text-white/70">
-              Speaking clips, backstage moments, and Human Intelligence in the
-              wild.
-            </p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <InstagramFeed />
-          </Reveal>
-          <p className="mt-8 text-center">
+          <div className="mt-12 grid items-center gap-8 lg:grid-cols-5">
+            <Reveal delay={0.1} y={40} className="lg:col-span-3">
+              <YouTubeEmbed
+                id={SPEAKER_REEL_ID}
+                title="Marni Blythe speaker reel: Human Intelligence and leadership"
+              />
+            </Reveal>
+            <Reveal delay={0.2} className="lg:col-span-2">
+              <TestimonialCard t={reelTestimonial} short emphasizeRole />
+            </Reveal>
+          </div>
+          <p className="mt-10 text-center">
             <a
-              href="https://www.instagram.com/marniblythespeaks"
+              href="https://www.youtube.com/@MarniBlytheSpeaks"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-bold uppercase tracking-[0.15em] text-gold underline underline-offset-8 hover:text-white"
+              data-track="youtube_channel"
+              className="inline-block text-sm font-bold uppercase tracking-[0.15em] text-gold underline underline-offset-8 hover:text-white"
             >
-              Follow on Instagram →
+              More clips on YouTube →
               <span className="sr-only"> (opens in new tab)</span>
             </a>
           </p>
         </div>
       </section>
 
-      {/* ============ BILLBOARD QUOTE ============ */}
-      <section className="section-purple relative overflow-hidden">
-        <div aria-hidden className="hairline-gold absolute inset-x-0 top-0" />
-        <div
-          aria-hidden
-          className="float-pulse absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-bright/15 blur-[130px]"
-        />
-        <Reveal className="relative mx-auto max-w-5xl px-5 py-24 text-center md:py-32">
-          <p className="font-serif text-[clamp(1.9rem,4.5vw,3.8rem)] font-medium italic leading-[1.25]">
-            <span aria-hidden className="gold-text mr-1 text-[1.4em] leading-none">
-              &ldquo;
-            </span>
-            The skill that moves organizations forward{" "}
-            <span className="gradient-text not-italic font-semibold">
-              isn&apos;t artificial — it&apos;s human.
-            </span>
-          </p>
-          <p className="mt-8 text-sm font-bold uppercase tracking-[0.35em] text-gold">
-            — Marni Blythe
-          </p>
-        </Reveal>
-        <div aria-hidden className="hairline-gold absolute inset-x-0 bottom-0" />
-      </section>
-
-      {/* ============ THE BOOK ============ */}
+      {/* ============ 10. THE BOOK ============ */}
       <section className="section-dark relative overflow-hidden">
         <div className="mx-auto grid max-w-6xl items-center gap-14 px-5 py-20 md:grid-cols-5 md:py-28">
           <Reveal className="relative mx-auto w-full max-w-[300px] md:col-span-2">
@@ -509,16 +575,12 @@ export default function Home() {
             <h2 className="text-3xl font-bold uppercase tracking-tight text-white md:text-4xl">
               Culture <span className="gradient-text">Catalyst</span>
             </h2>
-            <p className="mt-4 font-serif text-xl italic leading-snug text-white/85">
-              Your competitive edge for unleashing unprecedented company growth
-              and fostering high-performing, engaged teams.
-            </p>
-            <p className="mt-5 leading-relaxed text-white/75">
-              Co-authored with Tiffany Wuebben, <em>Culture Catalyst</em> is
-              the playbook behind Marni&apos;s keynotes: how leaders harness
-              emotional intelligence and communication to build a culture that
-              stands the test of time — because culture isn&apos;t your values
-              poster, it&apos;s what your people feel every day.
+            <p className="mt-5 leading-relaxed text-white/80">
+              Co-authored by Marni Blythe with Tiffany Wuebben, Amazon Best
+              Seller <em>Culture Catalyst</em> explores how emotional
+              intelligence, communication, and intentional leadership create
+              high-performing cultures where people and organizations can
+              grow.
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <a
@@ -543,7 +605,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ BRANDS ============ */}
+      {/* ============ 11. BRANDS & TEAMS ============ */}
       <section className="section-purple">
         <Reveal className="py-14">
           <p className="text-center text-xs font-bold uppercase tracking-[0.3em] text-white/50">
@@ -574,48 +636,90 @@ export default function Home() {
         </Reveal>
       </section>
 
-      {/* ============ TESTIMONIALS (light relief section) ============
-          3-up of verbatim excerpts (picked in src/lib/testimonials.ts);
-          the full set lives on /reviews */}
-      <section className="texture-light">
-        <div className="mx-auto max-w-6xl px-5 py-20 md:py-24">
-          <Reveal className="text-center">
-            <p className="text-sm font-bold uppercase tracking-[0.3em] text-brand">
-              What Leaders Say
+      {/* ============ 12. EXECUTIVE / OPERATOR CREDIBILITY ============
+          Operator proof, not a case study: no A/R numbers here (those belong
+          on the healthcare page, About, or the speaker packet). */}
+      <section className="section-dark">
+        <div className="mx-auto grid max-w-6xl gap-12 px-5 py-20 md:py-28 lg:grid-cols-2">
+          <Reveal>
+            <p className="mb-4 text-sm font-bold uppercase tracking-[0.3em] text-gold">
+              Operator Credibility
             </p>
-            <h2 className="mt-4 text-3xl font-bold uppercase tracking-tight text-navy md:text-4xl">
-              The room <span className="text-brand">remembers</span>
+            <h2 className="text-3xl font-bold uppercase leading-tight tracking-tight text-white md:text-4xl">
+              She has led inside the{" "}
+              <span className="gradient-text">organizations she speaks to</span>
             </h2>
+            <p className="mt-6 text-lg leading-relaxed text-white/85">
+              Marni doesn&apos;t only study leadership from the outside.
+            </p>
+            <p className="mt-4 leading-relaxed text-white/75">
+              She has served as a fractional executive inside growing
+              organizations, including surgical practices, working alongside
+              doctors, owners, and leadership teams through operational
+              challenges, culture change, leadership development,
+              accountability, and growth.
+            </p>
+            <p className="mt-4 leading-relaxed text-white/75">
+              That experience gives her a perspective audiences recognize
+              immediately: she knows what leadership feels like when the stakes
+              are real.
+            </p>
           </Reveal>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {homeTestimonials.map((t, i) => (
-              <Reveal key={t.attribution} delay={i * 0.1}>
-                <TestimonialCard t={t} on="light" short />
+          <div className="grid gap-6">
+            {operatorTestimonials.map((t, i) => (
+              <Reveal key={t.attribution} delay={0.1 + i * 0.1}>
+                <TestimonialCard t={t} short emphasizeRole />
               </Reveal>
             ))}
           </div>
-          <Reveal className="mt-10 text-center">
-            <Link
-              href="/reviews"
-              className="inline-block rounded-md border-2 border-navy/40 px-8 py-4 text-sm font-bold uppercase tracking-[0.15em] text-navy transition-colors hover:border-brand hover:text-brand"
-            >
-              Read all {testimonials.length} reviews
-            </Link>
-          </Reveal>
         </div>
       </section>
 
-      {/* ============ CLOSING CTA ============ */}
+      {/* ============ 13. INSTAGRAM (kept visually secondary) ============ */}
+      <section className="section-dark border-t border-white/5">
+        <div className="mx-auto max-w-5xl px-5 py-16">
+          <Reveal className="text-center">
+            <h2 className="text-2xl font-bold uppercase tracking-tight text-white md:text-3xl">
+              @marniblythespeaks
+            </h2>
+            <p className="mt-3 leading-relaxed text-white/70">
+              Speaking clips, backstage moments, and Human Intelligence in the
+              wild.
+            </p>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <InstagramFeed />
+          </Reveal>
+          <p className="mt-8 text-center">
+            <a
+              href="https://www.instagram.com/marniblythespeaks"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-bold uppercase tracking-[0.15em] text-gold underline underline-offset-8 hover:text-white"
+            >
+              Follow on Instagram →
+              <span className="sr-only"> (opens in new tab)</span>
+            </a>
+          </p>
+        </div>
+      </section>
+
+      {/* ============ 14. FINAL CTA ============ */}
       <section className="stage-glow text-white">
         <div className="mx-auto max-w-3xl px-5 py-24 text-center md:py-32">
           <Reveal>
             <h2 className="text-3xl font-bold uppercase leading-tight tracking-tight md:text-4xl">
-              Your audience doesn&apos;t need{" "}
-              <span className="gradient-text">another talk about AI</span>
+              Give your audience something they will{" "}
+              <span className="gradient-text">still be using on Monday</span>
             </h2>
-            <p className="mt-6 font-serif text-xl italic leading-relaxed text-white/85 md:text-2xl">
-              They need to remember what only humans can do — and how to lead
-              with it.
+            <p className="mt-6 text-lg leading-relaxed text-white/85">
+              Bring Marni to your next leadership meeting, conference, retreat,
+              annual meeting, or organizational event.
+            </p>
+            <p className="mt-4 font-serif text-xl italic leading-relaxed text-white/80 md:text-2xl">
+              Your audience will leave thinking differently about how they
+              lead, communicate, and work together, with practical tools they
+              can immediately put into action.
             </p>
           </Reveal>
           <Reveal delay={0.15}>

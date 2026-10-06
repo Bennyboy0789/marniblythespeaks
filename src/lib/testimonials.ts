@@ -1,9 +1,9 @@
 // Real, attributed testimonials supplied by Marni (Oct 2026). Quotes are
-// verbatim apart from spelling/typo fixes in transcribed video quotes — never
-// paraphrase, merge, or invent. `excerpt` is a verbatim trim (with ellipses)
-// for compact cards; the full quote always renders on /reviews.
-// Order inside each group is deliberate: non-dental voices first, per the
-// de-emphasize-healthcare direction. (Confirm permission before launch.)
+// verbatim apart from spelling/typo fixes in transcribed video quotes. Never
+// paraphrase, merge, or invent. `excerpt` is the short card version: the
+// home-page excerpts are the exact wording from Marni's Oct 2026 homepage
+// brief; the full quote always renders on /reviews.
+// (Confirm permission before launch.)
 export type Testimonial = {
   quote: string;
   excerpt?: string;
@@ -23,7 +23,7 @@ export const testimonials: Testimonial[] = [
     quote:
       "Marni was an incredible speaker for our group today. She is relatable, and her energy truly lights up the room. What I appreciated most was that she gave us actionable steps we could take with us to become stronger leaders.\n\nOur team especially connected with the idea of ‘soul care’ and the importance of caring for yourself so you can lead others with greater human intelligence. At the end of the day, genuine human connection matters above all else. I’m so grateful Marni joined us, and I know she would be an incredible speaker for any group.",
     excerpt:
-      "She is relatable, and her energy truly lights up the room. What I appreciated most was that she gave us actionable steps we could take with us to become stronger leaders. … I know she would be an incredible speaker for any group.",
+      "Marni was an incredible speaker for our group today. She is relatable, and her energy truly lights up the room. What I appreciated most was that she gave us actionable steps we could take with us to become stronger leaders.",
   },
   {
     kind: "organizer",
@@ -45,6 +45,8 @@ export const testimonials: Testimonial[] = [
     role: "CEO, Bright Direction Dental",
     quote:
       "We just had Marni speak at our annual event here in New Buffalo, Michigan. She did a fantastic job. We had our hygienists, office managers, dentists, teams all together, and I think she just did a tremendous job connecting all the dots for the team members. And I think everyone left feeling good with clear action items. So definitely great having her here.",
+    excerpt:
+      "She did a tremendous job connecting all the dots for the team members. Everyone left feeling good with clear action items.",
   },
   {
     kind: "organizer",
@@ -60,7 +62,7 @@ export const testimonials: Testimonial[] = [
     quote:
       "We’re here tonight at the Piedmont Comprehensive Study Club in Shelby, North Carolina. I have the privilege of visiting different study clubs every week, but tonight, we’re in an incredible venue with an amazing group of people who are learning and sharing together.\n\nThat’s the true strength of a study club: collaboration. One plus one makes eleven, not two. That’s the value of bringing people together.\n\nMarni’s presentation tonight was brilliant. I first saw her speak at our symposium, and she brings incredible energy into a room. She gets people talking, sharing ideas, laughing, and connecting.\n\nMarni has the emotional intelligence to connect with anyone and bring out the best in everyone. There are often quiet people in the audience, but she has a remarkable ability to get the entire room interacting, working together, and growing together.",
     excerpt:
-      "Marni has the emotional intelligence to connect with anyone and bring out the best in everyone. There are often quiet people in the audience, but she has a remarkable ability to get the entire room interacting, working together, and growing together.",
+      "Marni brings incredible energy into a room. She gets people talking, sharing ideas, laughing, and connecting. She has a remarkable ability to get the entire room interacting, working together, and growing together.",
   },
   {
     kind: "organizer",
@@ -110,6 +112,8 @@ export const testimonials: Testimonial[] = [
     role: "Chapel Hill Oral Surgery",
     quote:
       "Marni Blythe is impactful, insightful, and inspirational. She is an extremely talented speaker whose vulnerability and emotional intelligence speak volumes, allowing her to connect deeply with the entire audience. It was an absolutely amazing evening.",
+    excerpt:
+      "Marni Blythe is impactful, insightful, and inspirational. She is an extremely talented speaker whose vulnerability and emotional intelligence speak volumes, allowing her to connect deeply with the entire audience.",
   },
   {
     kind: "audience",
@@ -171,9 +175,18 @@ export const testimonials: Testimonial[] = [
   {
     kind: "worked-with",
     attribution: "Anne Duffy",
-    role: "CEO, DEW (Dental Entrepreneur Woman)",
+    role: "CEO, DEW",
     quote:
       "Marni Blythe is the epitome of leadership and emotional intelligence. Her compelling blend of heart and logic is a catalyst for genuine change, paving the way for exponential growth and unparalleled financial success. When Marni speaks, transformation happens. A true powerhouse in the world of leadership expertise.",
+    excerpt:
+      "Marni Blythe is the epitome of leadership and emotional intelligence. Her compelling blend of heart and logic is a catalyst for genuine change. When Marni speaks, transformation happens.",
+  },
+  {
+    kind: "worked-with",
+    attribution: "Dr. Brent Delong",
+    role: "Gaston Oral & Maxillofacial Surgery",
+    quote:
+      "Marni brought a level of strategic insight, operational discipline, and leadership that has elevated every aspect of our business.",
   },
   {
     kind: "worked-with",
@@ -196,12 +209,23 @@ const byName = (name: string) => {
   return t;
 };
 
-/** Home-page 3-up — breadth first: HI/soul care, room-reading, corporate. */
+/** Home proof trio (Marni's brief: three different orgs, CEOs prominent). */
 export const homeTestimonials = [
   byName("Christina Helwig"),
-  byName("Gary Dickenson"),
-  byName("Phil Mims"),
+  byName("Steve Wright"),
+  byName("Anne Duffy"),
 ];
 
-/** Compact organizer quote on /speaking — a booked keynote, non-dental. */
-export const speakingTestimonial = byName("Whitney Durley");
+/** Sits beside the speaker reel: validates what the buyer is watching. */
+export const reelTestimonial = byName("Gary Dickenson");
+
+/** Executive / operator credibility section on home. */
+export const operatorTestimonials = [
+  byName("Dr. David Lee Hill"),
+  byName("Dr. Brent Delong"),
+];
+
+/** /speaking: emphasizes customization. */
+export const speakingTestimonial = byName("Amanda Stawychey");
+
+export { byName as testimonialBy };

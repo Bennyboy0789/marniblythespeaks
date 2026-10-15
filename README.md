@@ -46,8 +46,7 @@ Set the same variables in Vercel project settings for deploys.
 
 ## Pre-launch blockers (content, not code)
 
-Two more named organizer testimonials · real speaker-packet PDF (replace
-placeholder + restore direct-download CTAs) · Marni's Calendly URL · Resend
+Two more named organizer testimonials · Marni's Calendly URL · Resend
 key · Behold feed · agency demo reel (spec: strongest moment in first 5s,
 90s–2min) · confirm Christina Helwig quote permission + phone number
 publication. Full list: `seo-report/ACTION-PLAN.md`.

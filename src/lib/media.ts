@@ -6,11 +6,9 @@ export const SPEAKER_REEL_URL = `https://youtu.be/${SPEAKER_REEL_ID}`;
 export const FULL_KEYNOTE_ID = "JlYC1sR4d9k";
 
 /**
- * Speaker packet: Marni's Oct 1 2026 "Leadership & Culture Speaker Snapshot"
- * one-sheet (from fullpocketcoaching.com). Instant download per Marni's
- * Oct 14 2026 walkthrough, no form gate.
- * TODO: swap in a Marni Blythe Speaks-branded version when she has one (this
- * one still carries the Full Pocket logo and contact details).
+ * Speaker packet: Marni's Oct 15 2026 Marni Blythe Speaks-branded "Speaker
+ * Snapshot" (2 pages: programs, bio, client quotes, book praise). Instant
+ * download per Marni's Oct 14 2026 walkthrough, no form gate.
  */
 export const SPEAKER_PACKET_URL = "/speaker-packet.pdf";
 export const SPEAKER_PACKET_FILENAME = "Marni-Blythe-Speaker-Packet.pdf";

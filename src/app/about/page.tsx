@@ -215,7 +215,56 @@ export default function About() {
               waiting for someone to bring it forward.
             </p>
           </Reveal>
-          <div className="mt-12 grid gap-4 sm:grid-cols-2">
+          {/* In Print. Marni (Oct 14 2026, 5:06): moved up under the story,
+              above the photos. Trial placement; also lives on /press. */}
+          <div className="mt-14 grid items-center gap-8 border-y border-white/10 py-12 sm:grid-cols-5">
+            <Reveal className="mx-auto w-full max-w-[220px] sm:col-span-2">
+              <a
+                href="https://issuu.com/dentalentrepreneur/docs/dental_entrepreneur_woman_-_summer_2026"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-track="press_dew_cover"
+                className="card-lux block overflow-hidden p-2 transition-transform hover:-translate-y-1"
+              >
+                <Image
+                  src="/images/press/dew-cover.jpg"
+                  alt="Marni Blythe on the cover of Dental Entrepreneur Woman, Summer 2026"
+                  width={1530}
+                  height={2048}
+                  sizes="220px"
+                  className="rounded-lg"
+                />
+                <span className="sr-only"> (opens in new tab)</span>
+              </a>
+            </Reveal>
+            <Reveal delay={0.12} className="sm:col-span-3">
+              <p className="mb-3 text-sm font-bold uppercase tracking-[0.3em] text-gold">
+                In Print
+              </p>
+              <h2 className="text-2xl font-bold uppercase tracking-tight text-white md:text-3xl">
+                On the cover, and{" "}
+                <span className="gradient-text">she wrote the story</span>
+              </h2>
+              <p className="mt-4 leading-relaxed text-white/80">
+                Marni is the Summer 2026 cover of{" "}
+                <em>Dental Entrepreneur Woman</em> and the author of its cover
+                story, &ldquo;The Power of the Pivot,&rdquo; on rebuilding
+                yourself and your business when the old playbook stops
+                working.
+              </p>
+              <a
+                href="https://issuu.com/dentalentrepreneur/docs/dental_entrepreneur_woman_-_summer_2026"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-track="press_dew_read"
+                className="mt-6 inline-block rounded-md border-2 border-gold/60 px-7 py-3.5 text-xs font-bold uppercase tracking-[0.15em] text-gold transition-colors hover:bg-gold hover:text-abyss"
+              >
+                Read the Issue
+                <span className="sr-only"> (opens in new tab)</span>
+              </a>
+            </Reveal>
+          </div>
+          <div className="mt-14 grid gap-4 sm:grid-cols-2">
             <Reveal className="relative aspect-[4/5] overflow-hidden rounded-xl">
               <Image
                 src="/images/stage/marni-onstage-podium.jpg"
@@ -235,57 +284,6 @@ export default function About() {
               />
             </Reveal>
           </div>
-        </div>
-      </section>
-
-      {/* In Print — first linked, verifiable press credential (audit item).
-          Lives on About; the home page brief (Oct 2026) does not include it. */}
-      <section className="section-dark border-t border-white/5">
-        <div className="mx-auto grid max-w-5xl items-center gap-12 px-5 py-20 md:grid-cols-5 md:py-24">
-          <Reveal className="mx-auto w-full max-w-[260px] md:col-span-2">
-            <a
-              href="https://issuu.com/dentalentrepreneur/docs/dental_entrepreneur_woman_-_summer_2026"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-track="press_dew_cover"
-              className="card-lux block overflow-hidden p-2 transition-transform hover:-translate-y-1"
-            >
-              <Image
-                src="/images/press/dew-cover.jpg"
-                alt="Marni Blythe on the cover of Dental Entrepreneur Woman, Summer 2026"
-                width={1530}
-                height={2048}
-                sizes="260px"
-                className="rounded-lg"
-              />
-              <span className="sr-only"> (opens in new tab)</span>
-            </a>
-          </Reveal>
-          <Reveal delay={0.12} className="md:col-span-3">
-            <p className="mb-4 text-sm font-bold uppercase tracking-[0.3em] text-gold">
-              In Print
-            </p>
-            <h2 className="text-3xl font-bold uppercase tracking-tight text-white md:text-4xl">
-              On the cover, and{" "}
-              <span className="gradient-text">she wrote the story</span>
-            </h2>
-            <p className="mt-5 leading-relaxed text-white/80">
-              Marni is the Summer 2026 cover of{" "}
-              <em>Dental Entrepreneur Woman</em> and the author of its cover
-              story, &ldquo;The Power of the Pivot,&rdquo; on rebuilding
-              yourself and your business when the old playbook stops working.
-            </p>
-            <a
-              href="https://issuu.com/dentalentrepreneur/docs/dental_entrepreneur_woman_-_summer_2026"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-track="press_dew_read"
-              className="mt-7 inline-block rounded-md border-2 border-gold/60 px-7 py-3.5 text-xs font-bold uppercase tracking-[0.15em] text-gold transition-colors hover:bg-gold hover:text-abyss"
-            >
-              Read the Issue
-              <span className="sr-only"> (opens in new tab)</span>
-            </a>
-          </Reveal>
         </div>
       </section>
 

@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import ContactForm from "@/components/ContactForm";
 import Reveal from "@/components/Reveal";
+import { SPEAKER_PACKET_FILENAME, SPEAKER_PACKET_URL } from "@/lib/media";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Book Keynote Speaker Marni Blythe",
+  title: "Book Professional Speaker Marni Blythe",
   description:
-    "Book keynote speaker Marni Blythe for your next conference, corporate retreat, all-staff meeting, or workshop. We respond within 24 hours.",
+    "Book professional speaker Marni Blythe for your next conference, corporate retreat, all-staff meeting, or workshop. We respond within 24 hours.",
   path: "/contact",
 });
 
@@ -17,15 +18,15 @@ export const metadata: Metadata = pageMetadata({
 const faqs = [
   {
     q: "How far in advance should we book?",
-    a: "Most dates book three to six months out, but ask about your date either way. If Marni can make it work, she will.",
+    a: "As early as you can. Marni is often booked up to a year out, so reach out as soon as you have a date in mind. If she can make it work, she will.",
   },
   {
     q: "Can Marni present virtually or hybrid?",
-    a: "Yes. Every program has an in-person, virtual, and hybrid format, and the virtual version is built for the screen, not a keynote pointed at a webcam.",
+    a: "Yes. Every program has an in-person, virtual, and hybrid format, and the virtual version is built for the screen, not a stage talk pointed at a webcam.",
   },
   {
     q: "Will the talk be customized to our event?",
-    a: "Always. Every booking includes a discovery call, and the keynote is rebuilt in your industry's language with your audience's real scenarios.",
+    a: "Yes. Every booking starts with a discovery call, and Marni tailors the examples and emphasis of her program to your audience and the outcomes you want.",
   },
   {
     q: "What about AV and logistics?",
@@ -98,19 +99,16 @@ export default function Contact() {
                 Speaker Packet
               </h2>
               <p className="mt-3 text-sm leading-relaxed text-white/70">
-                Topics, formats, bio, and everything your event team needs,
-                in one committee-ready PDF, sent straight to your inbox.
+                Programs, bio, and what clients say, in one committee-ready
+                PDF. Download it now and share it with your event team.
               </p>
-              {/* CRO: direct download disabled while the packet PDF is a
-                  placeholder — requesting by email protects credibility AND
-                  captures the lead. Restore href="/speaker-packet.pdf" when
-                  the real one-sheet ships. */}
               <a
-                href="mailto:hello@marniblythespeaks.com?subject=Speaker%20packet%20request"
-                data-track="packet_request"
+                href={SPEAKER_PACKET_URL}
+                download={SPEAKER_PACKET_FILENAME}
+                data-track="cta_packet_download"
                 className="mt-5 inline-block rounded-md bg-gradient-to-r from-brand-bright to-violet px-6 py-3 text-xs font-bold uppercase tracking-[0.15em] text-white transition hover:brightness-110"
               >
-                Request the Speaker Packet
+                Download the Speaker Packet
               </a>
             </Reveal>
 
@@ -161,8 +159,8 @@ export default function Contact() {
                 body: "Marni meets with you (and your leadership, if you want) to understand your audience and what success looks like.",
               },
               {
-                title: "Your talk, tailored",
-                body: "The keynote gets rebuilt around your industry, your event theme, and the outcomes you're after. You'll know exactly what's coming.",
+                title: "Your program, tailored",
+                body: "Marni tailors the examples and emphasis to your industry, your event theme, and the outcomes you're after. You'll know exactly what's coming.",
               },
               {
                 title: "Show time, and after",

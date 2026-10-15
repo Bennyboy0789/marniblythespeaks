@@ -25,8 +25,7 @@ export default function Privacy() {
               What we collect
             </h2>
             <p className="mt-2">
-              When you submit the booking inquiry form, request the speaker
-              packet, or email us, we collect the information you provide:
+              When you submit the booking inquiry form or email us, we collect the information you provide:
               your name, email address, organization, event details, and your
               message. This site also uses privacy-friendly, cookieless
               analytics (Vercel Analytics) that collect aggregate page-view and

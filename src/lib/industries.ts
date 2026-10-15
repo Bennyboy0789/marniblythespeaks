@@ -12,7 +12,8 @@ export type Industry = {
   fit: string;
   /** attribution of a testimonial in testimonials.ts to show on the page */
   testimonial?: string;
-  /** SERP title: winning competitors all use "[Industry] Keynote Speaker" */
+  /** SERP title. Marni (Oct 14 2026) wants "professional speaker", not
+   *  "keynote speaker" (she isn't keynote-only), so: "[Industry] Leadership Speaker" */
   seoTitle: string;
   /** Hand-written ~150-char meta description (never auto-sliced) */
   seoDescription: string;
@@ -31,7 +32,7 @@ export const industries: Industry[] = [
       "Your clinicians are burned out, AI is entering the exam room, and patients still need a human. HI is how your people stay human when the work speeds up.",
     headline: "AI is entering the exam room. Your patients still need a human.",
     intro:
-      "Marni Blythe is a keynote speaker for healthcare leadership conferences, study clubs, health system retreats, and practice owner events. She doesn't study healthcare from the outside: she has served as a fractional executive inside surgical practices, working alongside doctors, owners, and leadership teams through operational challenges, culture change, and growth. Clinical excellence can't outrun a broken culture. Human Intelligence means teams that communicate under pressure, leaders who prevent burnout instead of managing it, and patients who feel the difference.",
+      "Marni Blythe is a professional speaker for healthcare leadership conferences, study clubs, health system retreats, and practice owner events. She doesn't study healthcare from the outside: she has served as a fractional executive inside surgical practices, working alongside doctors, owners, and leadership teams through operational challenges, culture change, and growth. Clinical excellence can't outrun a broken culture. Human Intelligence means teams that communicate under pressure, leaders who prevent burnout instead of managing it, and patients who feel the difference.",
     painPoints: [
       {
         title: "Burnout is a leadership problem",
@@ -48,9 +49,9 @@ export const industries: Industry[] = [
     ],
     fit: "Annual doctors' meetings, study clubs, practice owner masterminds, healthcare leadership conferences, health system retreats, and team development days.",
     testimonial: "Dr. Ryan Holmes",
-    seoTitle: "Healthcare Keynote Speaker",
+    seoTitle: "Healthcare Leadership Speaker",
     seoDescription:
-      "Healthcare keynote speaker Marni Blythe helps clinical and practice leaders fight burnout with culture, trust, and communication that hold under pressure.",
+      "Professional speaker Marni Blythe helps clinical and practice leaders fight burnout with culture, trust, and communication that hold under pressure.",
   },
   {
     slug: "corporate",
@@ -61,7 +62,7 @@ export const industries: Industry[] = [
       "Your strategy is fine. Your execution is where the money leaks. HI gives leaders the clarity, conversations, and accountability that turn vision into results.",
     headline: "Your strategy is fine. Your execution is where the money leaks.",
     intro:
-      "Marni Blythe is a corporate keynote speaker for leadership summits, company retreats, and all-staff meetings. Organizations don't fail because leaders lack talent. They struggle because leaders lack the tools, mindset, and systems to translate vision into execution. Marni brings 25 years of operating experience, not just stage time, to leadership teams ready to close the gap between what they say and what actually happens.",
+      "Marni Blythe is a professional speaker for corporate leadership summits, company retreats, and all-staff meetings. Organizations don't fail because leaders lack talent. They struggle because leaders lack the tools, mindset, and systems to translate vision into execution. Marni brings 25 years of operating experience, not just stage time, to leadership teams ready to close the gap between what they say and what actually happens.",
     painPoints: [
       {
         title: "Vision dies in the middle",
@@ -78,9 +79,9 @@ export const industries: Industry[] = [
     ],
     fit: "Leadership summits, corporate retreats, all-staff meetings, and executive team workshops.",
     testimonial: "Phil Mims",
-    seoTitle: "Corporate Keynote Speaker",
+    seoTitle: "Corporate Leadership Speaker",
     seoDescription:
-      "Corporate keynote speaker Marni Blythe helps leadership teams close the gap between vision and execution with Human Intelligence in an AI world.",
+      "Professional speaker Marni Blythe helps leadership teams close the gap between vision and execution with Human Intelligence in an AI world.",
   },
   {
     slug: "education",
@@ -88,7 +89,7 @@ export const industries: Industry[] = [
     shortName: "Education",
     headline: "Your teachers are exhausted. Your leaders are stretched. HI is the reset.",
     intro:
-      "Marni Blythe is a keynote speaker for education conferences, district convenings, and school leadership retreats. Schools and districts don't have a talent problem. They have a capacity problem. Educators give everything to their students and run out of anything left for each other. Human Intelligence gives administrators, principals, and teacher-leaders a shared language for trust, honest conversations, and cultures where people stay.",
+      "Marni Blythe is a professional speaker for education conferences, district convenings, and school leadership retreats. Schools and districts don't have a talent problem. They have a capacity problem. Educators give everything to their students and run out of anything left for each other. Human Intelligence gives administrators, principals, and teacher-leaders a shared language for trust, honest conversations, and cultures where people stay.",
     painPoints: [
       {
         title: "Retention is the real crisis",
@@ -104,9 +105,9 @@ export const industries: Industry[] = [
       },
     ],
     fit: "In-service days, leadership retreats, administrator conferences, and district all-staff convenings.",
-    seoTitle: "Education Keynote Speaker",
+    seoTitle: "Education Leadership Speaker",
     seoDescription:
-      "Education keynote speaker Marni Blythe brings Human Intelligence to conferences, in-service days, and district leadership retreats across the country.",
+      "Professional speaker Marni Blythe brings Human Intelligence to conferences, in-service days, and district leadership retreats across the country.",
   },
   {
     slug: "real-estate",
@@ -114,7 +115,7 @@ export const industries: Industry[] = [
     shortName: "Real Estate",
     headline: "AI can write the listing. It can't earn the client's trust.",
     intro:
-      "Marni Blythe is a keynote speaker for real estate conferences, brokerage kickoffs, and team leadership retreats. Real estate has always been a relationship business, and the tools are changing faster than ever: AI writes the descriptions, sorts the leads, and drafts the follow-ups. What it can't do is sit across from a nervous buyer, lead a team of independent agents, or hold a deal together when emotions run high. That's Human Intelligence, and it's the edge that doesn't get automated.",
+      "Marni Blythe is a professional speaker for real estate conferences, brokerage kickoffs, and team leadership retreats. Real estate has always been a relationship business, and the tools are changing faster than ever: AI writes the descriptions, sorts the leads, and drafts the follow-ups. What it can't do is sit across from a nervous buyer, lead a team of independent agents, or hold a deal together when emotions run high. That's Human Intelligence, and it's the edge that doesn't get automated.",
     painPoints: [
       {
         title: "Agents leave cultures, not brokerages",
@@ -130,9 +131,9 @@ export const industries: Industry[] = [
       },
     ],
     fit: "Brokerage kickoffs and rallies, association conventions, team leadership retreats, and agent development days.",
-    seoTitle: "Real Estate Keynote Speaker",
+    seoTitle: "Real Estate Leadership Speaker",
     seoDescription:
-      "Real estate keynote speaker Marni Blythe helps brokers, team leads, and agents build the trust, culture, and client conversations that AI can't automate.",
+      "Professional speaker Marni Blythe helps brokers, team leads, and agents build the trust, culture, and client conversations that AI can't automate.",
   },
 ];
 

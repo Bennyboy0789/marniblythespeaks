@@ -1,6 +1,8 @@
 // Marni's four talks, from her "Speaking Topics - Short Descriptions" doc
 // (Oct 2026). Copy is hers; keep it verbatim apart from formatting.
 // NO EM DASHES anywhere in site copy (Marni: "AI dead giveaway").
+// Oct 14 2026 walkthrough: Marni's title in these descriptions is
+// "professional speaker", not "Fractional COO".
 export type Program = {
   title: string;
   /** stable anchor on /speaking (#id) */
@@ -15,6 +17,8 @@ export type Program = {
   audience: string;
   outcomes: string;
   formats: string;
+  /** YouTube video of this program, from Marni's channel */
+  video: { id: string; title: string };
 };
 
 export const signatureKeynote: Program = {
@@ -44,6 +48,10 @@ export const signatureKeynote: Program = {
     "Manage stress and respond thoughtfully under pressure, make better decisions, recognize the thought patterns and beliefs that shape how they lead, and use practical tools to build psychological safety and stronger, more resilient teams.",
   formats:
     "Keynote · half-day or full-day workshop · in-person, virtual, or hybrid",
+  video: {
+    id: "YsWuyDI3zLk",
+    title: "Human Intelligence in an AI World (Lead From Within)",
+  },
 };
 
 export const programs: Program[] = [
@@ -55,7 +63,7 @@ export const programs: Program[] = [
     hook: "Growth is rarely limited by talent. Predictable growth is never an accident.",
     description: [
       "Growth is rarely limited by talent. More often, it is limited by a lack of clarity, inconsistent accountability, misaligned teams, and leaders who spend their time solving the same problems over and over again.",
-      "In this highly practical and interactive program, leadership expert, Fractional COO, and bestselling author Marni Blythe shares the proven operating system she has used to help healthcare organizations create sustainable growth through organizational clarity and disciplined execution.",
+      "In this highly practical and interactive program, leadership expert, professional speaker, and bestselling author Marni Blythe shares the proven operating system she has used to help healthcare organizations create sustainable growth through organizational clarity and disciplined execution.",
       "Participants will learn how high-performing organizations establish a shared vision, define meaningful core values, create true accountability, measure what matters, and focus on the priorities that drive long-term success. Using real-world examples, interactive exercises, and immediately applicable tools, attendees will leave with a practical framework to strengthen leadership, improve communication, increase team engagement, and create predictable organizational growth.",
       "Whether leading a private practice, healthcare organization, or growing business, participants will gain the systems and leadership strategies needed to move from reacting to daily challenges toward intentionally building a culture that consistently performs at a higher level.",
       "Because predictable growth is never an accident. It is the result of intentional leadership and organizational alignment.",
@@ -75,6 +83,10 @@ export const programs: Program[] = [
     outcomes:
       "Align their team around a shared vision, mission, and values; establish clear ownership and true accountability; run the business with scorecards and KPIs; focus on the right priorities; implement leadership rhythms; and evaluate whether the right people are in the right seats.",
     formats: "Keynote · interactive workshop · in-person, virtual, or hybrid",
+    video: {
+      id: "JvVJRH7wo6o",
+      title: "The Formula for Predictable Growth: event recap",
+    },
   },
   {
     title: "Culture By Design, Not Default",
@@ -83,7 +95,7 @@ export const programs: Program[] = [
     description: [
       "Culture isn't created by chance. It is shaped by the conversations leaders have, the behaviors they model, the standards they reinforce, and the systems they intentionally build.",
       "Every organization has a culture. The only question is whether it was designed intentionally or developed by default.",
-      "In this engaging and practical program, leadership expert, Fractional COO, and bestselling author Marni Blythe shares the proven framework she has used to help healthcare organizations transform workplace culture into a strategic advantage. Participants will learn how leadership behaviors influence organizational performance, how trust and accountability create psychological safety, and how intentional systems foster engagement, retention, innovation, and exceptional patient experiences.",
+      "In this engaging and practical program, leadership expert, professional speaker, and bestselling author Marni Blythe shares the proven framework she has used to help healthcare organizations transform workplace culture into a strategic advantage. Participants will learn how leadership behaviors influence organizational performance, how trust and accountability create psychological safety, and how intentional systems foster engagement, retention, innovation, and exceptional patient experiences.",
       "Using practical tools, real-world case studies, interactive exercises, and immediately applicable strategies, attendees will leave with a clear roadmap for strengthening leadership, creating organizational alignment, and intentionally building the kind of culture where both people and performance thrive.",
       "Because culture isn't your greatest competitive advantage until you begin leading it intentionally.",
     ],
@@ -102,6 +114,10 @@ export const programs: Program[] = [
     outcomes:
       "Recognize how their own behaviors shape performance, use trust and accountability to build psychological safety, put systems in place that drive engagement and retention, and follow a clear roadmap for aligning the organization around the culture they want.",
     formats: "Keynote · interactive workshop · in-person, virtual, or hybrid",
+    video: {
+      id: "TjZ6OBO-WPU",
+      title: "Culture By Design, Not Default: workshop highlights",
+    },
   },
   {
     title: "Navigating High-Stakes Conversations",
@@ -109,7 +125,7 @@ export const programs: Program[] = [
     hook: "Leadership isn't measured by the easy conversations. It's revealed by the difficult ones.",
     description: [
       "Every leader eventually faces conversations they'd rather avoid: performance issues, accountability, conflict, difficult feedback, emotional employees, misalignment, resistance to change. The quality of these conversations often determines the quality of the culture.",
-      "Great leaders don't avoid difficult conversations. They know how to navigate them with confidence, emotional intelligence, and clarity. In this highly interactive session, leadership expert, bestselling author, and Fractional COO Marni Blythe teaches leaders how to approach high-stakes conversations in a way that strengthens trust rather than damages it.",
+      "Great leaders don't avoid difficult conversations. They know how to navigate them with confidence, emotional intelligence, and clarity. In this highly interactive session, leadership expert, bestselling author, and professional speaker Marni Blythe teaches leaders how to approach high-stakes conversations in a way that strengthens trust rather than damages it.",
       "Participants will learn how to regulate their own emotions before entering difficult discussions, communicate with clarity instead of emotion, reduce defensiveness, ask better questions, and create accountability without sacrificing relationships. Using Marni's practical CORE Conversation Framework, attendees will leave with a repeatable process they can immediately use to navigate feedback conversations, performance discussions, conflict resolution, coaching moments, and other high-pressure leadership situations.",
       "Because leadership isn't measured by the easy conversations. It's revealed by the difficult ones.",
     ],
@@ -127,6 +143,10 @@ export const programs: Program[] = [
     outcomes:
       "Regulate their own emotions before difficult discussions, communicate with clarity, reduce defensiveness, ask better questions, and hold people accountable without sacrificing relationships, using the ACT & CORE Conversation Framework as a repeatable process.",
     formats: "Keynote · interactive workshop · in-person, virtual, or hybrid",
+    video: {
+      id: "OrqERLISQZA",
+      title: "Crucial conversations and conflict resolution with Marni Blythe",
+    },
   },
 ];
 
@@ -138,8 +158,8 @@ export const reasonsToBook = [
     body: "Years inside organizations as a fractional executive, including surgical practices and growing businesses. The frameworks come from real P&Ls and real teams, not a book tour.",
   },
   {
-    title: "One brand, one big idea",
-    body: "Human Intelligence isn't a grab bag of leadership topics. It's a signature lens your audience will remember, and quote, long after the event.",
+    title: "Four signature programs, one lens",
+    body: "Human Intelligence isn't a grab bag of leadership topics. It's the lens behind all four of Marni's signature programs, and the idea your audience will remember, and quote, long after the event.",
   },
   {
     title: "Warmth that works a room",

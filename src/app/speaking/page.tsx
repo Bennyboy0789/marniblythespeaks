@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Link } from "next-view-transitions";
 import CtaPair from "@/components/CtaPair";
-import HiDefinition from "@/components/HiDefinition";
 import Reveal from "@/components/Reveal";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
 import { industries } from "@/lib/industries";
-import { SPEAKER_REEL_ID } from "@/lib/media";
+import { FULL_KEYNOTE_ID, SPEAKER_REEL_ID } from "@/lib/media";
 import {
   allTalks,
   type Program,
@@ -18,9 +16,9 @@ import { pageMetadata } from "@/lib/seo";
 import { speakingTestimonial } from "@/lib/testimonials";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Keynote Speaker & Leadership Programs",
+  title: "Speaking Programs & Leadership Workshops",
   description:
-    "Keynote speaker Marni Blythe's signature talk, Human Intelligence in an AI World, plus programs on predictable growth, culture, and high-stakes conversations.",
+    "Professional speaker Marni Blythe's four signature programs: Human Intelligence in an AI World, predictable growth, culture by design, and high-stakes conversations.",
   path: "/speaking",
 });
 
@@ -103,7 +101,7 @@ export default function Speaking() {
       <section id={signatureKeynote.id} className="stage-glow scroll-mt-20 text-white">
         <div className="mx-auto max-w-6xl px-5 py-16 md:py-24">
           <h1 className="mb-4 text-sm font-bold uppercase tracking-[0.3em] text-gold">
-            Keynote Speaking &amp; Programs · Signature Keynote
+            Speaking Programs · Four Signature Programs
           </h1>
           <div className="grid items-start gap-12 md:grid-cols-2">
             <Reveal>
@@ -124,16 +122,10 @@ export default function Speaking() {
               </p>
             </Reveal>
             <Reveal delay={0.15}>
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl shadow-2xl shadow-brand/30">
-                <Image
-                  src="/images/marni-stage.png"
-                  alt="Marni Blythe delivering a keynote to a packed ballroom"
-                  fill
-                  priority
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  className="object-cover"
-                />
-              </div>
+              <YouTubeEmbed
+                id={signatureKeynote.video.id}
+                title={signatureKeynote.video.title}
+              />
               <BuyerAnswers p={signatureKeynote} />
               <Objectives p={signatureKeynote} />
               <Link
@@ -141,10 +133,53 @@ export default function Speaking() {
                 data-track="cta_book_marni"
                 className="btn-shine mt-8 inline-block rounded-md bg-gradient-to-r from-brand-bright to-violet px-8 py-4 text-sm font-bold uppercase tracking-[0.15em] text-white shadow-lg shadow-brand-bright/25 transition hover:brightness-110"
               >
-                Bring This Keynote to Your Event
+                Bring This Program to Your Event
               </Link>
             </Reveal>
           </div>
+        </div>
+      </section>
+
+      {/* Videos. Marni (Oct 14 2026): keep the video, but bring it up. */}
+      <section className="section-dark border-t border-white/5">
+        <div className="mx-auto max-w-6xl px-5 py-16 md:py-20">
+          <Reveal>
+            <h2 className="text-center text-3xl font-bold uppercase tracking-tight text-white md:text-4xl">
+              Watch Marni <span className="gradient-text">Speak</span>
+            </h2>
+          </Reveal>
+          <div className="mt-12 grid gap-8 md:grid-cols-2">
+            <Reveal delay={0.1}>
+              <YouTubeEmbed
+                id={SPEAKER_REEL_ID}
+                title="Marni Blythe speaker reel: Human Intelligence and leadership"
+              />
+              <p className="mt-4 text-center text-xs font-bold uppercase tracking-[0.2em] text-gold">
+                Speaker reel
+              </p>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <YouTubeEmbed
+                id={FULL_KEYNOTE_ID}
+                title="Ride the Wave: Human Intelligence in the Age of AI, full-length keynote"
+              />
+              <p className="mt-4 text-center text-xs font-bold uppercase tracking-[0.2em] text-gold">
+                Full-length keynote: Ride the Wave
+              </p>
+            </Reveal>
+          </div>
+          <p className="mt-10 text-center">
+            <a
+              href="https://www.youtube.com/@MarniBlytheSpeaks"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-track="youtube_channel"
+              className="inline-block text-sm font-bold uppercase tracking-[0.15em] text-gold underline underline-offset-8 hover:text-white"
+            >
+              More clips on YouTube →
+              <span className="sr-only"> (opens in new tab)</span>
+            </a>
+          </p>
         </div>
       </section>
 
@@ -175,10 +210,10 @@ export default function Speaking() {
               The <span className="gradient-text">Programs</span>
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-center leading-relaxed text-white/70">
-              Every keynote can stand alone and is customized to the audience,
-              organization, and outcomes you want to create. Keynotes energize
-              and reframe; workshops turn the ideas into practice. Every
-              program is available in-person, virtual, or hybrid.
+              Every program works as a keynote or a hands-on workshop.
+              Keynotes energize and reframe; workshops turn the ideas into
+              practice. Every program is available in person, virtual, or
+              hybrid.
             </p>
           </Reveal>
           <div className="mt-12 space-y-8">
@@ -204,6 +239,7 @@ export default function Speaking() {
                     </div>
                   </div>
                   <div>
+                    <YouTubeEmbed id={p.video.id} title={p.video.title} />
                     <BuyerAnswers p={p} />
                     <Objectives p={p} />
                     <Link
@@ -220,21 +256,17 @@ export default function Speaking() {
         </div>
       </section>
 
-      {/* Canonical HI definition (verbatim across /, /about, /speaking) */}
-      <HiDefinition />
-
-      {/* How HI gets tailored — research: planners probe customization depth
-          before booking; showing the process converts "book me" into a
-          consultative offer */}
+      {/* How Marni prepares. Marni (Oct 14 2026): she does NOT rebuild every
+          talk per client, so this promises fit and emphasis, not a rewrite. */}
       <section className="section-dark border-t border-white/5">
         <div className="mx-auto max-w-6xl px-5 py-20 md:py-24">
           <Reveal className="mx-auto max-w-2xl text-center">
             <p className="mb-4 text-sm font-bold uppercase tracking-[0.3em] text-gold">
-              No Generic Talks
+              Built for Your Room
             </p>
             <h2 className="text-3xl font-bold uppercase tracking-tight text-white md:text-4xl">
-              How HI gets tailored{" "}
-              <span className="gradient-text">to your room</span>
+              How Marni prepares{" "}
+              <span className="gradient-text">for your event</span>
             </h2>
           </Reveal>
           <div className="mt-12 grid gap-6 sm:grid-cols-3">
@@ -244,8 +276,8 @@ export default function Speaking() {
                 body: "Before anything else, Marni talks with your leadership about your audience, your pressures, and what you need people saying on the way out.",
               },
               {
-                title: "Your language, your examples",
-                body: "The talk gets rebuilt around your industry's reality: the scenarios, the vocabulary, the wins your people will actually recognize.",
+                title: "The right program, the right emphasis",
+                body: "Marni recommends the program that fits your goals and leans into the examples your people will recognize. The framework is proven; the emphasis fits your room.",
               },
               {
                 title: "Built to outlast the applause",
@@ -294,35 +326,6 @@ export default function Speaking() {
             ))}
           </div>
           </Reveal>
-        </div>
-      </section>
-
-      {/* Videos */}
-      <section className="section-dark">
-        <div className="mx-auto max-w-6xl px-5 py-20 md:py-24">
-          <Reveal>
-            <h2 className="text-center text-3xl font-bold uppercase tracking-tight text-white md:text-4xl">
-              Watch Marni <span className="gradient-text">Speak</span>
-            </h2>
-          </Reveal>
-          <Reveal delay={0.1} className="mx-auto mt-12 max-w-4xl">
-            <YouTubeEmbed
-              id={SPEAKER_REEL_ID}
-              title="Marni Blythe speaker reel: Human Intelligence and leadership"
-            />
-          </Reveal>
-          <p className="mt-8 text-center">
-            <a
-              href="https://www.youtube.com/@MarniBlytheSpeaks"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-track="youtube_channel"
-              className="inline-block text-sm font-bold uppercase tracking-[0.15em] text-gold underline underline-offset-8 hover:text-white"
-            >
-              More clips on YouTube →
-              <span className="sr-only"> (opens in new tab)</span>
-            </a>
-          </p>
         </div>
       </section>
 

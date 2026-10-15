@@ -1,13 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { Link } from "next-view-transitions";
+import { SPEAKER_PACKET_FILENAME, SPEAKER_PACKET_URL } from "@/lib/media";
 
 const links = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/speaking", label: "Speaking" },
   { href: "/reviews", label: "Reviews" },
+  { href: "/press", label: "Press" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -35,19 +38,22 @@ export default function Nav() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-abyss/90 backdrop-blur">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-        <Link
-          href="/"
-          className="font-serif text-xl font-semibold tracking-tight text-white"
-          onClick={() => setOpen(false)}
-        >
-          Marni Blythe <span className="gold-text">Speaks</span>
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-5 py-2.5">
+        <Link href="/" className="shrink-0" onClick={() => setOpen(false)}>
+          <Image
+            src="/images/logo-horizontal-reversed.png"
+            alt="Marni Blythe Speaks"
+            width={1252}
+            height={600}
+            priority
+            className="h-14 w-auto md:h-16"
+          />
         </Link>
 
-        <div className="hidden items-center gap-7 lg:flex">
+        <div className="hidden items-center gap-6 lg:flex">
           {links.map((l) => (
             <Link
-              key={l.href}
+              key={l.label}
               href={l.href}
               className="text-sm font-medium text-white/80 transition-colors hover:text-white"
             >
@@ -55,14 +61,15 @@ export default function Nav() {
             </Link>
           ))}
           {/* Planner feedback: the packet is what gets forwarded to the
-              committee, so it lives in the nav too */}
-          <Link
-            href="/contact"
-            data-track="cta_packet_request"
+              committee, so it lives in the nav too (instant download) */}
+          <a
+            href={SPEAKER_PACKET_URL}
+            download={SPEAKER_PACKET_FILENAME}
+            data-track="cta_packet_download"
             className="text-sm font-bold uppercase tracking-[0.12em] text-gold transition-colors hover:text-white"
           >
             Speaker Packet
-          </Link>
+          </a>
           <Link
             href="/contact"
             data-track="cta_book_marni"
@@ -102,7 +109,7 @@ export default function Nav() {
         <div className="border-t border-white/10 bg-abyss px-5 pb-6 pt-2 lg:hidden">
           {links.map((l) => (
             <Link
-              key={l.href}
+              key={l.label}
               href={l.href}
               className="block py-3 text-base font-medium text-white/90"
               onClick={() => setOpen(false)}
@@ -117,14 +124,15 @@ export default function Nav() {
           >
             Bring Marni to Your Event
           </Link>
-          <Link
-            href="/contact"
-            data-track="cta_packet_request"
+          <a
+            href={SPEAKER_PACKET_URL}
+            download={SPEAKER_PACKET_FILENAME}
+            data-track="cta_packet_download"
             className="mt-3 block rounded-md border-2 border-gold/60 px-5 py-3 text-center text-sm font-bold uppercase tracking-[0.15em] text-gold"
             onClick={() => setOpen(false)}
           >
-            Request Speaker Packet
-          </Link>
+            Download Speaker Packet
+          </a>
         </div>
       )}
     </header>

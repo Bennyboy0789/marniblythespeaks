@@ -76,7 +76,7 @@ export default async function IndustryPage({
             <span className="text-white/80">{ind.name}</span>
           </nav>
           <p className="mb-4 text-sm font-bold uppercase tracking-[0.3em] text-gold">
-            {ind.name} Keynote Speaker · Human Intelligence
+            {ind.name} Programs · Professional Speaker
           </p>
           <h1 className="text-4xl font-bold uppercase leading-tight tracking-tight md:text-5xl">
             {ind.headline}
@@ -122,13 +122,14 @@ export default async function IndustryPage({
         </section>
       )}
 
-      {/* Keynote fit */}
+      {/* Program fit. Photo: on-stage shot (Marni, Oct 14 2026: the old
+          conference photo with the Full Pocket slide was the wrong picture) */}
       <section className="section-purple">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 md:grid-cols-2 md:py-28">
           <Reveal className="relative aspect-[4/3] w-full overflow-hidden rounded-xl shadow-2xl shadow-brand/30">
             <Image
-              src="/images/marni-conference.jpg"
-              alt="Marni Blythe delivering a keynote on stage"
+              src="/images/stage/marni-onstage-scn.jpg"
+              alt="Marni Blythe on stage speaking to a leadership audience"
               fill
               sizes="(min-width: 768px) 50vw, 100vw"
               className="object-cover"
@@ -136,17 +137,17 @@ export default async function IndustryPage({
           </Reveal>
           <Reveal delay={0.15}>
             <p className="mb-4 text-sm font-bold uppercase tracking-[0.3em] text-gold">
-              The Talk
+              The Signature Program
             </p>
             <h2 className="text-3xl font-bold uppercase tracking-tight text-white md:text-4xl">
               <span className="gradient-text">Human Intelligence</span> in an
               AI World
             </h2>
             <p className="mt-5 leading-relaxed text-white/80">
-              Not another AI talk, and never a generic one. Every booking
-              starts with a discovery call with your leadership, and the
-              keynote gets rebuilt in {ind.name.toLowerCase()}&apos;s language:
-              your scenarios, your pressures, your wins.
+              Not another AI talk. Every booking starts with a discovery call
+              with your leadership, so Marni can recommend the right program
+              and bring in the {ind.name.toLowerCase()} examples your people
+              will recognize.
             </p>
             <p className="mt-4 text-sm leading-relaxed text-white/70">
               <span className="font-bold uppercase tracking-[0.25em] text-gold">
@@ -158,7 +159,7 @@ export default async function IndustryPage({
               href="/speaking"
               className="mt-6 block text-sm font-bold uppercase tracking-[0.15em] text-gold underline underline-offset-8 hover:text-white"
             >
-              See all four talks →
+              See all four programs →
             </Link>
             <Link
               href="/contact"

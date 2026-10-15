@@ -6,6 +6,8 @@ type Props = {
   id: string;
   title: string;
   className?: string;
+  /** smaller play button for grids of videos */
+  compact?: boolean;
 };
 
 /**
@@ -13,8 +15,15 @@ type Props = {
  * (~1MB) YouTube player after the visitor presses play. Never autoplays on
  * its own (site rule), and uses youtube-nocookie until clicked.
  */
-export default function YouTubeEmbed({ id, title, className = "" }: Props) {
+export default function YouTubeEmbed({
+  id,
+  title,
+  className = "",
+  compact = false,
+}: Props) {
   const [playing, setPlaying] = useState(false);
+  // Not every upload has a maxres thumbnail; hqdefault always exists.
+  const [thumb, setThumb] = useState("maxresdefault");
 
   return (
     <div
@@ -32,21 +41,28 @@ export default function YouTubeEmbed({ id, title, className = "" }: Props) {
         <button
           type="button"
           onClick={() => setPlaying(true)}
-          data-track="reel_play"
+          data-track="video_play"
+          data-track-label={id}
           className="group absolute inset-0 h-full w-full"
         >
           {/* eslint-disable-next-line @next/next/no-img-element -- remote
               YouTube thumbnail; next/image would need a remotePatterns entry
               for one decorative poster */}
           <img
-            src={`https://i.ytimg.com/vi/${id}/maxresdefault.jpg`}
+            src={`https://i.ytimg.com/vi/${id}/${thumb}.jpg`}
             alt=""
             loading="lazy"
+            onError={() => setThumb("hqdefault")}
+            // YouTube answers a missing maxres with a 120x90 grey placeholder
+            // (not always an error), so check the size too.
+            onLoad={(e) => {
+              if (e.currentTarget.naturalWidth <= 120) setThumb("hqdefault");
+            }}
             className="h-full w-full object-cover opacity-85 transition-opacity group-hover:opacity-100"
           />
           <span className="absolute inset-0 bg-gradient-to-t from-abyss/70 via-transparent to-transparent" />
-          <span className="absolute left-1/2 top-1/2 flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-gradient-to-r from-brand-bright to-violet shadow-[0_0_45px_-5px_rgba(124,58,237,0.9)] transition-transform group-hover:scale-110">
-            <svg width="28" height="28" viewBox="0 0 24 24" className="ml-1 fill-white">
+          <span className={`absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full ${compact ? "h-14 w-14" : "h-20 w-20"} bg-gradient-to-r from-brand-bright to-violet shadow-[0_0_45px_-5px_rgba(124,58,237,0.9)] transition-transform group-hover:scale-110`}>
+            <svg width={compact ? 20 : 28} height={compact ? 20 : 28} viewBox="0 0 24 24" className="ml-1 fill-white">
               <path d="M8 5v14l11-7z" />
             </svg>
           </span>

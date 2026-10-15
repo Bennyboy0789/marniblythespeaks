@@ -5,7 +5,8 @@ import { track } from "@vercel/analytics";
 
 /**
  * Fires a Vercel Analytics event for any click on an element carrying a
- * data-track attribute (value = event name). One listener, zero per-CTA
+ * data-track attribute (value = event name; optional data-track-label is
+ * sent as a property). One listener, zero per-CTA
  * client components.
  */
 export default function TrackClicks() {
@@ -15,7 +16,8 @@ export default function TrackClicks() {
         "[data-track]"
       );
       const name = el?.dataset.track;
-      if (name) track(name);
+      const label = el?.dataset.trackLabel;
+      if (name) track(name, label ? { label } : undefined);
     }
     document.addEventListener("click", onClick, { capture: true });
     return () =>

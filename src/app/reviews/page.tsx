@@ -2,13 +2,15 @@ import type { Metadata } from "next";
 import CtaPair from "@/components/CtaPair";
 import Reveal from "@/components/Reveal";
 import TestimonialCard from "@/components/TestimonialCard";
+import YouTubeEmbed from "@/components/YouTubeEmbed";
+import { videoTestimonials } from "@/lib/media";
 import { pageMetadata } from "@/lib/seo";
 import { testimonials } from "@/lib/testimonials";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Reviews of Keynote Speaker Marni Blythe",
+  title: "Reviews of Professional Speaker Marni Blythe",
   description:
-    "What CEOs, event organizers, and audiences say after booking keynote speaker Marni Blythe, in their own words.",
+    "What CEOs, event organizers, and audiences say after booking professional speaker Marni Blythe, on video and in their own words.",
   path: "/reviews",
 });
 
@@ -32,30 +34,65 @@ export default function Reviews() {
             <span className="gradient-text">Marni takes the room</span>
           </h1>
           <p className="rise rise-3 mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/80">
-            {testimonials.length} reviews from CEOs, event organizers, and the
+            Video and written reviews from CEOs, event organizers, and the
             people in the seats, in their own words.
           </p>
           <div className="rise rise-4 mt-10 flex flex-col items-center gap-6">
             <CtaPair on="dark" className="justify-center" />
             <a
-              href="https://www.youtube.com/@MarniBlytheSpeaks"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-track="youtube_channel"
+              href="#videos"
               className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.15em] text-lavender transition-colors hover:text-white"
             >
               <svg width="12" height="12" viewBox="0 0 24 24" className="fill-current">
                 <path d="M8 5v14l11-7z" />
               </svg>
-              Watch video testimonials on YouTube
-              <span className="sr-only"> (opens in new tab)</span>
+              Watch the video testimonials
             </a>
           </div>
         </div>
       </section>
 
+      {/* Video testimonials first. Marni (Oct 14 2026): the page was too
+          text-heavy; lead with people saying it on camera. */}
+      <section id="videos" className="section-dark scroll-mt-20">
+        <div className="mx-auto max-w-6xl px-5 py-20 md:py-24">
+          <Reveal>
+            <h2 className="text-center text-3xl font-bold uppercase tracking-tight text-white md:text-4xl">
+              Hear it <span className="gradient-text">from them</span>
+            </h2>
+          </Reveal>
+          <div className="mt-12 grid gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+            {videoTestimonials.map((v, i) => (
+              <Reveal key={v.id} delay={(i % 3) * 0.08}>
+                <YouTubeEmbed
+                  id={v.id}
+                  title={`${v.name} on working with Marni Blythe`}
+                  compact
+                />
+                <p className="mt-3 text-xs font-bold uppercase tracking-[0.2em] text-gold">
+                  {v.name}
+                </p>
+                <p className="mt-1 text-sm text-white/65">{v.context}</p>
+              </Reveal>
+            ))}
+          </div>
+          <p className="mt-12 text-center">
+            <a
+              href="https://www.youtube.com/@MarniBlytheSpeaks"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-track="youtube_channel"
+              className="inline-block text-sm font-bold uppercase tracking-[0.15em] text-gold underline underline-offset-8 hover:text-white"
+            >
+              More on YouTube →
+              <span className="sr-only"> (opens in new tab)</span>
+            </a>
+          </p>
+        </div>
+      </section>
+
       {/* Organizers — the buyer's voice leads */}
-      <section className="section-dark">
+      <section className="section-dark border-t border-white/5">
         <div className="mx-auto max-w-6xl px-5 py-20 md:py-28">
           <Reveal>
             <h2 className="text-center text-3xl font-bold uppercase tracking-tight text-white md:text-4xl">

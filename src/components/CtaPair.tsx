@@ -1,4 +1,5 @@
 import { Link } from "next-view-transitions";
+import { SPEAKER_PACKET_FILENAME, SPEAKER_PACKET_URL } from "@/lib/media";
 
 type Props = {
   /** "dark" for dark section backgrounds, "light" for the cream relief section */
@@ -21,15 +22,15 @@ export default function CtaPair({ on = "dark", className = "" }: Props) {
       >
         Bring Marni to Your Event
       </Link>
-      {/* CRO: packet PDF is a placeholder, so route requests through contact
-          until the real one-sheet ships, then restore /speaker-packet.pdf */}
-      <Link
-        href="/contact"
-        data-track="cta_packet_request"
+      {/* Instant download, no gate (Marni, Oct 14 2026) */}
+      <a
+        href={SPEAKER_PACKET_URL}
+        download={SPEAKER_PACKET_FILENAME}
+        data-track="cta_packet_download"
         className={`rounded-md border-2 px-8 py-4 text-center text-sm font-bold uppercase tracking-[0.15em] transition-colors ${outline}`}
       >
-        Request Speaker Packet
-      </Link>
+        Download Speaker Packet
+      </a>
     </div>
   );
 }

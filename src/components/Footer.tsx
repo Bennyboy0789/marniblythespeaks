@@ -1,5 +1,7 @@
+import Image from "next/image";
 import { Link } from "next-view-transitions";
-import { programs, signatureKeynote } from "@/lib/programs";
+import { SPEAKER_PACKET_FILENAME, SPEAKER_PACKET_URL } from "@/lib/media";
+import { allTalks } from "@/lib/programs";
 
 const socials = [
   {
@@ -24,8 +26,8 @@ const links = [
   { href: "/about", label: "About Marni" },
   { href: "/speaking", label: "Speaking & Programs" },
   { href: "/reviews", label: "Reviews" },
+  { href: "/press", label: "Press" },
   { href: "/contact", label: "Bring Marni to Your Event" },
-  { href: "/contact", label: "Request the Speaker Packet" },
   { href: "/privacy", label: "Privacy Policy" },
 ];
 
@@ -48,18 +50,28 @@ export default function Footer() {
                 </Link>
               </li>
             ))}
+            <li>
+              <a
+                href={SPEAKER_PACKET_URL}
+                download={SPEAKER_PACKET_FILENAME}
+                data-track="cta_packet_download"
+                className="text-sm text-white/75 transition-colors hover:text-gold"
+              >
+                Download the Speaker Packet
+              </a>
+            </li>
           </ul>
         </div>
 
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-white/50">
-            Speaking Topics
+            Signature Programs
           </p>
           <ul className="mt-4 space-y-2.5">
-            {[signatureKeynote, ...programs].map((p) => (
+            {allTalks.map((p) => (
               <li key={p.title}>
                 <Link
-                  href="/speaking"
+                  href={`/speaking#${p.id}`}
                   className="text-sm text-white/75 transition-colors hover:text-gold"
                 >
                   {p.title}
@@ -119,9 +131,13 @@ export default function Footer() {
               </a>
             ))}
           </div>
-          <p className="mt-6 font-serif text-lg font-semibold">
-            Marni Blythe <span className="text-gold">Speaks</span>
-          </p>
+          <Image
+            src="/images/logo-horizontal-reversed.png"
+            alt="Marni Blythe Speaks"
+            width={1252}
+            height={600}
+            className="mt-6 h-16 w-auto"
+          />
         </div>
       </div>
       <div className="border-t border-white/10 py-5 text-center text-xs tracking-wide text-white/60">

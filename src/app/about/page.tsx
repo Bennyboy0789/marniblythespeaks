@@ -2,14 +2,13 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import CtaPair from "@/components/CtaPair";
 import FeaturedBy from "@/components/FeaturedBy";
-import HiDefinition from "@/components/HiDefinition";
 import Reveal from "@/components/Reveal";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "About Marni Blythe, Keynote Speaker",
+  title: "About Marni Blythe, Professional Speaker",
   description:
-    "Meet keynote speaker Marni Blythe: operator, fractional executive, Culture Catalyst co-author, and the voice behind Human Intelligence.",
+    "Meet professional speaker Marni Blythe: operator, fractional executive, Culture Catalyst co-author, and the voice behind Human Intelligence.",
   path: "/about",
 });
 
@@ -20,9 +19,9 @@ const personJsonLd = {
   name: "Marni Blythe",
   url: "https://marniblythespeaks.com/about",
   image: "https://marniblythespeaks.com/images/marni-portrait-1.jpg",
-  jobTitle: "Keynote Speaker",
+  jobTitle: "Professional Speaker",
   description:
-    "Marni Blythe is a keynote speaker and the voice behind Human Intelligence, the umbrella for everything she teaches about leadership, communication, and culture. She spent more than 25 years leading, building, and rebuilding organizations, from Fortune 500 marketing and her own agency to serving as a fractional executive inside surgical practices and growing businesses through her firm Full Pocket Coaching, and co-authored the Amazon best-selling book Culture Catalyst.",
+    "Marni Blythe is a professional speaker and the voice behind Human Intelligence, the umbrella for everything she teaches about leadership, communication, and culture. She spent more than 25 years leading, building, and rebuilding organizations, from Fortune 500 marketing and her own agency to serving as a fractional executive inside surgical practices and growing businesses through her firm Full Pocket Coaching, and co-authored the Amazon best-selling book Culture Catalyst.",
   worksFor: { "@id": "https://marniblythespeaks.com/#organization" },
   knowsAbout: [
     "Human Intelligence",
@@ -88,7 +87,7 @@ export default function About() {
               Servant&apos;s heart.
             </h1>
             <p className="mt-6 text-lg leading-relaxed text-white/85">
-              Marni Blythe is a keynote speaker and the voice behind Human
+              Marni Blythe is a professional speaker and the voice behind Human
               Intelligence, the umbrella for everything she teaches about
               leadership, communication, and culture.
             </p>
@@ -121,6 +120,44 @@ export default function About() {
               className="relative z-10 mx-auto w-full max-w-sm drop-shadow-[0_30px_70px_rgba(124,58,237,0.5)]"
             />
           </Reveal>
+        </div>
+      </section>
+
+      {/* L.I.V.E.S. Marni (Oct 14 2026): core values move up, right under
+          the hero; the HI definition block was dropped here as redundant. */}
+      <section className="section-purple">
+        <div className="mx-auto max-w-5xl px-5 py-20 md:py-28">
+          <Reveal className="text-center">
+            <p className="mb-4 text-sm font-bold uppercase tracking-[0.3em] text-gold">
+              The Values
+            </p>
+            <h2 className="text-3xl font-bold uppercase tracking-[0.2em] text-white md:text-4xl">
+              L.I.V.E.S.
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl leading-relaxed text-white/70">
+              The framework behind everything Marni teaches, and how she runs
+              her own work.
+            </p>
+          </Reveal>
+          <div className="mt-12 space-y-4">
+            {lives.map((v, i) => (
+              <Reveal key={v.letter} delay={i * 0.08}>
+              <div className="card-lux flex gap-6 p-6">
+                <span className="gradient-text font-serif text-4xl font-semibold leading-none">
+                  {v.letter}
+                </span>
+                <div>
+                  <h3 className="font-bold uppercase tracking-wider text-white">
+                    {v.value}
+                  </h3>
+                  <p className="mt-1 text-sm leading-relaxed text-white/70">
+                    {v.body}
+                  </p>
+                </div>
+              </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -181,62 +218,22 @@ export default function About() {
           <div className="mt-12 grid gap-4 sm:grid-cols-2">
             <Reveal className="relative aspect-[4/5] overflow-hidden rounded-xl">
               <Image
-                src="/images/marni-event-2.jpg"
-                alt="Marni with attendees at a conference"
+                src="/images/stage/marni-onstage-podium.jpg"
+                alt="Marni Blythe on stage, leading a room through a workshop exercise"
                 fill
                 sizes="(min-width: 640px) 50vw, 100vw"
-                className="object-cover"
+                className="object-cover object-[center_60%]"
               />
             </Reveal>
             <Reveal delay={0.12} className="relative aspect-[4/5] overflow-hidden rounded-xl">
               <Image
-                src="/images/marni-event-3.jpg"
-                alt="Marni with an event group"
+                src="/images/stage/marni-onstage-speaking.jpg"
+                alt="Marni Blythe mid-keynote, speaking with energy on stage"
                 fill
                 sizes="(min-width: 640px) 50vw, 100vw"
-                className="object-cover"
+                className="object-cover object-top"
               />
             </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* Canonical HI definition (verbatim across /, /about, /speaking) */}
-      <HiDefinition />
-
-      {/* L.I.V.E.S. */}
-      <section className="section-purple">
-        <div className="mx-auto max-w-5xl px-5 py-20 md:py-28">
-          <Reveal className="text-center">
-            <p className="mb-4 text-sm font-bold uppercase tracking-[0.3em] text-gold">
-              The Values
-            </p>
-            <h2 className="text-3xl font-bold uppercase tracking-[0.2em] text-white md:text-4xl">
-              L.I.V.E.S.
-            </h2>
-            <p className="mx-auto mt-4 max-w-xl leading-relaxed text-white/70">
-              The framework behind everything Marni teaches, and how she runs
-              her own work.
-            </p>
-          </Reveal>
-          <div className="mt-12 space-y-4">
-            {lives.map((v, i) => (
-              <Reveal key={v.letter} delay={i * 0.08}>
-              <div className="card-lux flex gap-6 p-6">
-                <span className="gradient-text font-serif text-4xl font-semibold leading-none">
-                  {v.letter}
-                </span>
-                <div>
-                  <h3 className="font-bold uppercase tracking-wider text-white">
-                    {v.value}
-                  </h3>
-                  <p className="mt-1 text-sm leading-relaxed text-white/70">
-                    {v.body}
-                  </p>
-                </div>
-              </div>
-              </Reveal>
-            ))}
           </div>
         </div>
       </section>

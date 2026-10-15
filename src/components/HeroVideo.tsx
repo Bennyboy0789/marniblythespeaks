@@ -5,41 +5,44 @@ import { useEffect, useState } from "react";
 type NetworkInformation = { saveData?: boolean };
 
 /**
- * CRO: the hero video costs ~5.5MB — on phones and data-saver connections we
- * skip it entirely and let the poster image (rendered by the parent) carry the
- * hero. Desktop gets the full cinematic loop.
- * TODO: ask the video agency for a ~1MB 720p web loop of hero.webm + an H.264
- * MP4 fallback, then drop both in /public/videos and add the mp4 <source>.
+ * The FPC stage footage Marni asked for (Oct 14 2026: "the old video from the
+ * other website, with the movement") until her new video arrives.
+ * H.264 MP4 so it plays everywhere, including Safari and iPhone (the old 4K
+ * VP9 WebM never played there, so she only ever saw the still). Phones get a
+ * ~1.4MB 720p cut, desktop a ~4MB 1080p one; reduced-motion and data-saver
+ * visitors keep the poster image the parent renders.
  */
 export default function HeroVideo() {
-  const [showVideo, setShowVideo] = useState(false);
+  const [src, setSrc] = useState<string | null>(null);
 
   useEffect(() => {
     const id = requestAnimationFrame(() => {
-      const wide = window.matchMedia("(min-width: 768px)").matches;
       const reduced = window.matchMedia(
         "(prefers-reduced-motion: reduce)"
       ).matches;
       const saveData = (
         navigator as Navigator & { connection?: NetworkInformation }
       ).connection?.saveData;
-      if (wide && !reduced && !saveData) setShowVideo(true);
+      if (reduced || saveData) return;
+      const wide = window.matchMedia("(min-width: 768px)").matches;
+      setSrc(wide ? "/videos/hero-1080.mp4" : "/videos/hero-720.mp4");
     });
     return () => cancelAnimationFrame(id);
   }, []);
 
-  if (!showVideo) return null;
+  if (!src) return null;
 
   return (
     <video
-      className="hero-video absolute inset-0 h-full w-full object-cover"
+      key={src}
+      className="hero-video absolute inset-0 h-full w-full object-cover object-[65%_25%]"
       autoPlay
       muted
       loop
       playsInline
       aria-hidden
     >
-      <source src="/videos/hero.webm" type="video/webm" />
+      <source src={src} type="video/mp4" />
     </video>
   );
 }

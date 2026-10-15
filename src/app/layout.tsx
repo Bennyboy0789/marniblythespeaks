@@ -21,12 +21,12 @@ const dmSans = DM_Sans({
 });
 
 const SITE_DESCRIPTION =
-  "Keynote speaker Marni Blythe helps healthcare and corporate leaders communicate better, build stronger cultures, and grow predictably with Human Intelligence.";
+  "Professional speaker Marni Blythe helps healthcare and corporate leaders communicate better, build stronger cultures, and grow predictably with Human Intelligence.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://marniblythespeaks.com"),
   title: {
-    default: "Marni Blythe Speaks | Keynote Speaker for Healthcare and Corporate Leaders",
+    default: "Marni Blythe Speaks | Professional Speaker for Healthcare and Corporate Leaders",
     template: "%s | Marni Blythe Speaks",
   },
   description: SITE_DESCRIPTION,
@@ -39,14 +39,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Marni Blythe Speaks",
-    title: "Marni Blythe Speaks | Keynote Speaker for Healthcare and Corporate Leaders",
+    title: "Marni Blythe Speaks | Professional Speaker for Healthcare and Corporate Leaders",
     description: SITE_DESCRIPTION,
     url: "/",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Marni Blythe Speaks | Keynote Speaker for Healthcare and Corporate Leaders",
+    title: "Marni Blythe Speaks | Professional Speaker for Healthcare and Corporate Leaders",
     description: SITE_DESCRIPTION,
     images: ["/og-image.png"],
   },
@@ -65,7 +65,7 @@ const orgJsonLd = {
       url: "https://marniblythespeaks.com",
       logo: "https://marniblythespeaks.com/icon-512.png",
       description:
-        "Keynote speaking and leadership programs built around Human Intelligence, equipping healthcare and corporate leaders, and organizations across education and real estate, to communicate better, build stronger cultures, and grow predictably.",
+        "Speaking programs and leadership workshops built around Human Intelligence, equipping healthcare and corporate leaders, and organizations across education and real estate, to communicate better, build stronger cultures, and grow predictably.",
       email: "hello@marniblythespeaks.com",
       telephone: "+1-646-413-4872",
       founder: { "@id": "https://marniblythespeaks.com/about#marni-blythe" },
@@ -115,18 +115,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
-        {/* Headliner announcement bar — scarcity signal consistent with the
-            FAQ's real "3–6 months out" booking window */}
+        {/* Headliner announcement bar. Marni (Oct 14 2026): "Now booking 2027
+            programs", no lead-time claim (she books up to a year out) */}
         <a
           href="/contact"
           data-track="announcement_bar"
           className="block bg-gradient-to-r from-brand via-brand-bright to-brand px-4 py-2 text-center text-[11px] font-bold uppercase tracking-[0.2em] text-white transition hover:brightness-110"
         >
-          Now booking 2026–2027 keynotes
-          <span className="mx-2 text-gold" aria-hidden>
+          Now booking 2027 programs
+          <span className="ml-2 text-gold" aria-hidden>
             ✦
           </span>
-          <span className="text-white/80">Dates fill 3–6 months out</span>
         </a>
         <Nav />
         <main id="main" className="flex-1">

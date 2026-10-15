@@ -12,13 +12,17 @@ import TestimonialCard from "@/components/TestimonialCard";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
 
 import { industries } from "@/lib/industries";
-import { SPEAKER_REEL_ID } from "@/lib/media";
+import {
+  SPEAKER_PACKET_FILENAME,
+  SPEAKER_PACKET_URL,
+  SPEAKER_REEL_ID,
+  videoTestimonials,
+} from "@/lib/media";
 import { allTalks } from "@/lib/programs";
 import {
   homeTestimonials,
   operatorTestimonials,
   reelTestimonial,
-  testimonials,
 } from "@/lib/testimonials";
 
 // Page order follows Marni's Oct 2026 homepage brief, written for the planner
@@ -74,7 +78,10 @@ const stats: { value: ReactNode; label: string }[] = [
     value: "Multiple Industries",
     label: "Healthcare, corporate, education, associations, and professional services",
   },
-  { value: "1 Big Idea", label: "Human Intelligence" },
+  {
+    value: "4 Signature Programs",
+    label: "Human Intelligence · Growth · Culture · Conversations",
+  },
   { value: "Best-Selling Author", label: "Culture Catalyst" },
 ];
 
@@ -94,6 +101,10 @@ const bookJsonLd = {
   sameAs: "https://culturecatalystbook.com",
   image: "https://marniblythespeaks.com/images/book-mockup.webp",
 };
+
+const homeVideoTestimonials = ["G21nSNzJ0QI", "Sp58OLAjwr8", "idS7oEKto-A"].map(
+  (id) => videoTestimonials.find((v) => v.id === id)!
+);
 
 export default function Home() {
   const featured = industries.filter((i) => i.featured);
@@ -115,7 +126,7 @@ export default function Home() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[center_30%]"
+          className="object-cover object-top"
           aria-hidden
         />
         <HeroVideo />
@@ -140,7 +151,7 @@ export default function Home() {
         >
           <span className="block h-20 w-px bg-gradient-to-b from-transparent to-gold/60" />
           <p className="[writing-mode:vertical-rl] rotate-180 text-xs font-bold uppercase tracking-[0.45em] text-gold">
-            Keynote Speaker · Marni Blythe
+            Professional Speaker · Marni Blythe
           </p>
           <span className="block h-20 w-px bg-gradient-to-t from-transparent to-gold/60" />
         </div>
@@ -149,7 +160,7 @@ export default function Home() {
           {/* Mobile eyebrow (the rail replaces this on desktop) */}
           <div className="rise lg:hidden">
             <p className="mb-5 text-xs font-bold uppercase tracking-[0.35em] text-gold">
-              Keynote Speaker · Marni Blythe
+              Professional Speaker · Marni Blythe
             </p>
           </div>
 
@@ -174,7 +185,7 @@ export default function Home() {
           <div className="mt-10 flex flex-col gap-8 md:mt-12 md:flex-row md:items-end md:justify-between">
             <div className="rise rise-3 max-w-md border-l-2 border-gold/60 pl-5">
               <p className="text-base leading-relaxed text-white/85">
-                Programs and keynotes for organizations committed to
+                Speaking programs for organizations committed to
                 high-performing leadership, thriving cultures, and the human
                 intelligence required to lead in a rapidly changing world.
               </p>
@@ -198,13 +209,14 @@ export default function Home() {
                   Watch Marni Speak
                 </a>
               </div>
-              <Link
-                href="/contact"
-                data-track="cta_packet_request"
+              <a
+                href={SPEAKER_PACKET_URL}
+                download={SPEAKER_PACKET_FILENAME}
+                data-track="cta_packet_download"
                 className="text-center text-xs font-bold uppercase tracking-[0.2em] text-white/70 underline underline-offset-8 transition-colors hover:text-gold sm:text-right"
               >
-                Or request the speaker packet
-              </Link>
+                Or download the speaker packet
+              </a>
             </div>
           </div>
         </div>
@@ -246,7 +258,7 @@ export default function Home() {
 
       {/* ============ 4. INTRODUCING MARNI ============ */}
       <section className="section-dark overflow-hidden">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 md:grid-cols-2 md:py-28">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 pb-20 pt-10 md:grid-cols-2 md:pb-28 md:pt-12">
           <Reveal>
             <p className="mb-4 text-sm font-bold uppercase tracking-[0.3em] text-lavender">
               Introducing Marni
@@ -272,7 +284,7 @@ export default function Home() {
                 <span className="gradient-text">Operator.</span>
               </h3>
               <p className="mt-4 leading-relaxed text-white/80">
-                Marni brings more than keynote theory to the stage. She has
+                Marni brings more than theory to the stage. She has
                 spent decades leading businesses, developing leaders, building
                 teams, navigating organizational change, and serving inside
                 companies as a fractional executive.
@@ -345,12 +357,32 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
+          {/* Marni (Oct 14 2026): "where are the YouTube videos going to
+              go?" Three video testimonials sit right under the quotes. */}
+          <div className="mt-6 grid gap-6 md:grid-cols-3">
+            {homeVideoTestimonials.map((v, i) => (
+              <Reveal key={v.id} delay={i * 0.1}>
+                <YouTubeEmbed
+                  id={v.id}
+                  title={`${v.name} on working with Marni Blythe`}
+                  compact
+                  className="shadow-xl shadow-navy/20"
+                />
+                <p className="mt-3 text-xs font-bold uppercase tracking-[0.2em] text-navy">
+                  {v.name}{" "}
+                  <span className="font-medium normal-case tracking-normal text-ink/70">
+                    · {v.context}
+                  </span>
+                </p>
+              </Reveal>
+            ))}
+          </div>
           <Reveal className="mt-10 text-center">
             <Link
               href="/reviews"
               className="inline-block rounded-md border-2 border-navy/40 px-8 py-4 text-sm font-bold uppercase tracking-[0.15em] text-navy transition-colors hover:border-brand hover:text-brand"
             >
-              Read all {testimonials.length} reviews
+              Read and watch all the reviews
             </Link>
           </Reveal>
         </div>
@@ -392,7 +424,7 @@ export default function Home() {
                     {ind.teaser}
                   </p>
                   <span className="mt-6 text-xs font-bold uppercase tracking-[0.15em] text-gold transition-colors group-hover:text-white">
-                    {ind.name} keynotes →
+                    {ind.name} programs →
                   </span>
                 </Link>
               </Reveal>
@@ -468,11 +500,12 @@ export default function Home() {
               The Programs
             </p>
             <h2 className="text-3xl font-bold uppercase tracking-tight text-white md:text-4xl">
-              Keynotes and <span className="gradient-text">workshops</span>
+              Four <span className="gradient-text">signature programs</span>
             </h2>
             <p className="mt-4 leading-relaxed text-white/75">
-              Every keynote can stand alone and is customized to the audience,
-              organization, and outcomes you want to create.
+              Each one works as a keynote or a hands-on workshop, in person,
+              virtual, or hybrid, and is tailored to your audience and the
+              outcomes you want to create.
             </p>
           </Reveal>
           <div className="mt-12 grid gap-6 sm:grid-cols-2">
@@ -484,7 +517,7 @@ export default function Home() {
                 >
                   {p.signature && (
                     <span className="mb-3 self-start rounded-sm bg-gold/15 px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.2em] text-gold">
-                      Signature keynote
+                      Flagship program
                     </span>
                   )}
                   <h3 className="font-bold uppercase tracking-wide text-white">

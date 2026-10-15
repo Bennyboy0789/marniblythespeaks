@@ -166,7 +166,7 @@ export default function Press() {
               Download the Speaker Packet
             </a>
             <a
-              href="mailto:hello@marniblythespeaks.com?subject=Media%20inquiry"
+              href="mailto:marni@marniblythespeaks.com?subject=Media%20inquiry"
               data-track="media_inquiry"
               className="rounded-md border-2 border-gold/60 px-8 py-4 text-center text-sm font-bold uppercase tracking-[0.15em] text-gold transition-colors hover:bg-gold hover:text-abyss"
             >
@@ -344,10 +344,10 @@ export default function Press() {
           <p className="mx-auto mt-5 max-w-xl leading-relaxed text-white/75">
             Booking a guest for your show, panel, or publication? Email{" "}
             <a
-              href="mailto:hello@marniblythespeaks.com?subject=Media%20inquiry"
+              href="mailto:marni@marniblythespeaks.com?subject=Media%20inquiry"
               className="font-bold text-gold underline underline-offset-4 hover:text-white"
             >
-              hello@marniblythespeaks.com
+              marni@marniblythespeaks.com
             </a>
             .
           </p>

@@ -60,10 +60,10 @@ export default function Privacy() {
             <p className="mt-2">
               Want your information corrected or deleted? Email{" "}
               <a
-                href="mailto:hello@marniblythespeaks.com"
+                href="mailto:marni@marniblythespeaks.com"
                 className="font-bold text-gold underline underline-offset-4 hover:text-white"
               >
-                hello@marniblythespeaks.com
+                marni@marniblythespeaks.com
               </a>{" "}
               and we&apos;ll take care of it.
             </p>

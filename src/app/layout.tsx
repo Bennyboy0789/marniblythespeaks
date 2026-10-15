@@ -66,7 +66,7 @@ const orgJsonLd = {
       logo: "https://marniblythespeaks.com/icon-512.png",
       description:
         "Speaking programs and leadership workshops built around Human Intelligence, equipping healthcare and corporate leaders, and organizations across education and real estate, to communicate better, build stronger cultures, and grow predictably.",
-      email: "hello@marniblythespeaks.com",
+      email: "marni@marniblythespeaks.com",
       telephone: "+1-646-413-4872",
       founder: { "@id": "https://marniblythespeaks.com/about#marni-blythe" },
       sameAs: [
@@ -78,7 +78,7 @@ const orgJsonLd = {
         {
           "@type": "ContactPoint",
           contactType: "sales",
-          email: "hello@marniblythespeaks.com",
+          email: "marni@marniblythespeaks.com",
           telephone: "+1-646-413-4872",
           areaServed: "US",
           availableLanguage: ["English"],

@@ -86,7 +86,7 @@ export default function Contact() {
               {/* CRO: the Calendly URL 404'd — routing to email until Marni
                   supplies the real scheduling link, then restore an <a> to it */}
               <a
-                href="mailto:hello@marniblythespeaks.com?subject=Discovery%20call%20request"
+                href="mailto:marni@marniblythespeaks.com?subject=Discovery%20call%20request"
                 data-track="discovery_call_request"
                 className="mt-5 inline-block rounded-md border-2 border-gold px-6 py-3 text-xs font-bold uppercase tracking-[0.15em] text-gold transition-colors hover:bg-gold hover:text-navy"
               >
@@ -117,10 +117,10 @@ export default function Contact() {
                 Reach out directly
               </h2>
               <a
-                href="mailto:hello@marniblythespeaks.com"
+                href="mailto:marni@marniblythespeaks.com"
                 className="mt-3 block font-bold text-gold underline underline-offset-4 hover:text-white"
               >
-                hello@marniblythespeaks.com
+                marni@marniblythespeaks.com
               </a>
               {/* Phone from Marni's existing speaking materials — confirm
                   she wants it published here before launch */}

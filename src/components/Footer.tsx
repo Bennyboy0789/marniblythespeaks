@@ -86,10 +86,10 @@ export default function Footer() {
             Contact
           </p>
           <a
-            href="mailto:hello@marniblythespeaks.com"
+            href="mailto:marni@marniblythespeaks.com"
             className="mt-4 block text-sm text-white/75 transition-colors hover:text-gold"
           >
-            hello@marniblythespeaks.com
+            marni@marniblythespeaks.com
           </a>
           <a
             href="tel:+16464134872"

@@ -7,13 +7,13 @@ import { NextResponse } from "next/server";
 //
 // Env vars (set locally in .env.local and in Vercel project settings):
 //   RESEND_API_KEY  — required to activate
-//   INQUIRY_TO      — destination inbox (default hello@marniblythespeaks.com)
+//   INQUIRY_TO      — destination inbox (default marni@marniblythespeaks.com)
 //   INQUIRY_FROM    — verified sender (default onboarding@resend.dev, which
-//                     works out of the box; swap for hello@marniblythespeaks.com
+//                     works out of the box; swap for marni@marniblythespeaks.com
 //                     once the domain is verified in Resend — the auto-ack to
 //                     the planner requires the verified domain)
 
-const TO = process.env.INQUIRY_TO ?? "hello@marniblythespeaks.com";
+const TO = process.env.INQUIRY_TO ?? "marni@marniblythespeaks.com";
 const FROM = process.env.INQUIRY_FROM ?? "onboarding@resend.dev";
 
 type Inquiry = {
@@ -104,7 +104,7 @@ export async function POST(req: Request) {
         "",
         "Talk soon,",
         "Marni Blythe Speaks",
-        "hello@marniblythespeaks.com",
+        "marni@marniblythespeaks.com",
       ].join("\n"),
     });
   } catch {

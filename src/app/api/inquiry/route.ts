@@ -1,20 +1,20 @@
 import { NextResponse } from "next/server";
 
 // Booking-inquiry endpoint. Sends the inquiry to Marni's inbox and an
-// auto-acknowledgment to the planner via Resend (https://resend.com — free
-// tier covers this volume). Until RESEND_API_KEY is configured, returns 503
+// auto-acknowledgment to the planner via the SMTP2GO HTTP API
+// (https://www.smtp2go.com). Until SMTP2GO_API_KEY is configured, returns 503
 // and the client falls back to the mailto flow.
 //
 // Env vars (set locally in .env.local and in Vercel project settings):
-//   RESEND_API_KEY  — required to activate
+//   SMTP2GO_API_KEY — required to activate (needs the "Emails" send permission)
 //   INQUIRY_TO      — destination inbox (default marni@marniblythespeaks.com)
-//   INQUIRY_FROM    — verified sender (default onboarding@resend.dev, which
-//                     works out of the box; swap for marni@marniblythespeaks.com
-//                     once the domain is verified in Resend — the auto-ack to
-//                     the planner requires the verified domain)
+//   INQUIRY_FROM    — sender; its domain must be a verified sender domain in
+//                     SMTP2GO (default marniblythespeaks.com)
 
 const TO = process.env.INQUIRY_TO ?? "marni@marniblythespeaks.com";
-const FROM = process.env.INQUIRY_FROM ?? "onboarding@resend.dev";
+const FROM =
+  process.env.INQUIRY_FROM ??
+  "Marni Blythe Speaks <marni@marniblythespeaks.com>";
 
 type Inquiry = {
   name: string;
@@ -40,16 +40,29 @@ function isValid(d: unknown): d is Inquiry {
   );
 }
 
-async function sendEmail(key: string, payload: object) {
-  const res = await fetch("https://api.resend.com/emails", {
+type Email = { to: string; subject: string; text: string; replyTo?: string };
+
+async function sendEmail(key: string, { to, subject, text, replyTo }: Email) {
+  const res = await fetch("https://api.smtp2go.com/v3/email/send", {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${key}`,
+      "X-Smtp2go-Api-Key": key,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(payload),
+    body: JSON.stringify({
+      sender: FROM,
+      to: [to],
+      subject,
+      text_body: text,
+      ...(replyTo && {
+        custom_headers: [{ header: "Reply-To", value: replyTo }],
+      }),
+    }),
   });
-  if (!res.ok) throw new Error(`Resend ${res.status}: ${await res.text()}`);
+  const body = await res.json().catch(() => null);
+  if (!res.ok || !body?.data?.succeeded) {
+    throw new Error(`SMTP2GO ${res.status}: ${JSON.stringify(body)}`);
+  }
 }
 
 export async function POST(req: Request) {
@@ -58,7 +71,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false, reason: "invalid" }, { status: 400 });
   }
 
-  const key = process.env.RESEND_API_KEY;
+  const key = process.env.SMTP2GO_API_KEY;
   if (!key) {
     return NextResponse.json(
       { ok: false, reason: "not-configured" },
@@ -78,22 +91,20 @@ export async function POST(req: Request) {
 
   try {
     await sendEmail(key, {
-      from: FROM,
-      to: [TO],
-      reply_to: data.email,
+      to: TO,
+      replyTo: data.email,
       subject: `Speaking inquiry: ${data.eventType} | ${data.organization || data.name}`,
       text: lines,
     });
-  } catch {
+  } catch (err) {
+    console.error("[inquiry] send failed", err);
     return NextResponse.json({ ok: false, reason: "send-failed" }, { status: 502 });
   }
 
-  // Auto-acknowledgment to the planner. Best-effort: fails silently until the
-  // sending domain is verified in Resend.
+  // Auto-acknowledgment to the planner. Best-effort.
   try {
     await sendEmail(key, {
-      from: FROM,
-      to: [data.email],
+      to: data.email,
       subject: "Got it! Your inquiry reached Marni Blythe Speaks",
       text: [
         `Hi ${data.name.split(" ")[0]},`,
@@ -107,8 +118,8 @@ export async function POST(req: Request) {
         "marni@marniblythespeaks.com",
       ].join("\n"),
     });
-  } catch {
-    // non-fatal
+  } catch (err) {
+    console.error("[inquiry] auto-ack failed", err);
   }
 
   return NextResponse.json({ ok: true });

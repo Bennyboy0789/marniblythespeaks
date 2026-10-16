@@ -26,7 +26,7 @@ npm run lint
 
 | Variable | Purpose |
 |---|---|
-| `RESEND_API_KEY` | Activates the booking form backend (`/api/inquiry`) + auto-acknowledgment email. Until set, the form falls back to a pre-filled mailto draft. |
+| `SMTP2GO_API_KEY` | Activates the booking form backend (`/api/inquiry`) + auto-acknowledgment email. Until set, the form falls back to a pre-filled mailto draft. |
 | `INQUIRY_TO` / `INQUIRY_FROM` | Inquiry delivery inbox / verified sender. |
 | `NEXT_PUBLIC_IG_FEED_URL` | Behold.so JSON feed for the home-page Instagram grid. Until set, the grid renders nothing (no placeholders). |
 
@@ -46,7 +46,7 @@ Set the same variables in Vercel project settings for deploys.
 
 ## Pre-launch blockers (content, not code)
 
-Two more named organizer testimonials · Marni's Calendly URL · Resend
+Two more named organizer testimonials · Marni's Calendly URL · SMTP2GO
 key · Behold feed · agency demo reel (spec: strongest moment in first 5s,
 90s–2min) · confirm Christina Helwig quote permission + phone number
 publication. Full list: `seo-report/ACTION-PLAN.md`.

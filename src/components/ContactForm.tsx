@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-// Posts to /api/inquiry (Resend-backed once RESEND_API_KEY is set). If the
+// Posts to /api/inquiry (SMTP2GO-backed once SMTP2GO_API_KEY is set). If the
 // endpoint isn't configured or the network fails, falls back to opening a
 // pre-filled email draft so no inquiry is ever dead-ended.
 const BOOKING_EMAIL = "marni@marniblythespeaks.com";

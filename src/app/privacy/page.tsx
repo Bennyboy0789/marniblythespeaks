@@ -49,7 +49,7 @@ export default function Privacy() {
             </h2>
             <p className="mt-2">
               Service providers who make this site work (form and email
-              delivery (Resend), hosting and analytics (Vercel), and scheduling
+              delivery (SMTP2GO), hosting and analytics (Vercel), and scheduling
               tools) receive only what they need to perform those services.
             </p>
           </div>

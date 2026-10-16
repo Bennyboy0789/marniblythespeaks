@@ -167,16 +167,16 @@ export default function Home() {
           {/* HI stays visible as the methodology brand line; the H1 says who
               Marni is for and what changes (Marni's brief, section 1) */}
           <p className="rise rise-2 font-bold uppercase leading-none tracking-tight">
-            <span className="gold-text mr-[0.15em] text-[clamp(1.6rem,3.6vw,3rem)]">Human</span>{" "}
-            <span className="gradient-text text-[clamp(1.6rem,3.6vw,3rem)]">
+            <span className="gold-text mr-[0.15em] text-[clamp(1.4rem,2.8vw,2.25rem)]">Human</span>{" "}
+            <span className="gradient-text text-[clamp(1.4rem,2.8vw,2.25rem)]">
               Intelligence
             </span>
           </p>
-          <h1 className="rise rise-2 mt-5 max-w-5xl font-bold uppercase leading-[1.02] tracking-tight">
-            <span className="block text-[clamp(1rem,1.9vw,1.4rem)] tracking-[0.25em] text-white/90">
+          <h1 className="rise rise-2 mt-4 max-w-3xl font-bold uppercase leading-[1.02] tracking-tight">
+            <span className="block text-[clamp(0.85rem,1.4vw,1.1rem)] tracking-[0.25em] text-white/90">
               Healthcare and Corporate Leaders:
             </span>
-            <span className="mt-3 block text-[clamp(2.1rem,5.2vw,4.6rem)]">
+            <span className="mt-3 block text-[clamp(1.75rem,3.6vw,3.25rem)]">
               Communicate Better, Build Stronger Cultures, and{" "}
               <span className="gradient-text">Grow Predictably</span>
             </span>
